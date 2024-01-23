@@ -1,0 +1,42 @@
+#label2{
+    -fx-text-fill: white;
+    -fx-font-size: 25px;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+}
+#loginNew,#passwordNew,#emailNew{
+    -fx-background-color: #706f6f;
+    -fx-text-fill: white;
+    -fx-pref-width: 280;
+    -fx-pref-height: 35;
+    -fx-background-radius: 9;
+    -fx-font-weight: bold;
+}
+#signButton{
+    -fx-background-color: transparent;
+}
+#loginLabel{
+    -fx-text-fill: white;
+    -fx-font-size: 15;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+}
+#loginLabel:hover{
+    -fx-text-fill: #6b6a6a;
+}
+#mainBox{
+    -fx-background-color: #252121;
+    -fx-pref-height: 50;
+}
+#showPassword .box{
+    -fx-background-color: #706f6f;
+}
+#showPassword:selected .mark{
+    -fx-background-color: black;
+}
+#msgLabel{
+    -fx-text-fill: white;
+    -fx-font-size: 10;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+}

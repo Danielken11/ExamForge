@@ -1,0 +1,8 @@
+.root{
+    -fx-background-color: linear-gradient(to bottom, #443D40, #494954);
+}
+#serverLoadIndicator{
+    -fx-progress-color: white;
+    -fx-scale-x: 1.4;
+    -fx-scale-y: 1.4;
+}

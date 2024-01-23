@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane stylesheets="@assets/loadStyle.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.example.examforge.LoadingController">
+    <top>
+        <HBox alignment="CENTER">
+            <ImageView>
+                <image>
+                    <Image url="@assets/Logo.png" />
+                </image>
+            </ImageView>
+        </HBox>
+    </top>
+    <bottom>
+        <HBox alignment="CENTER">
+           <ProgressIndicator fx:id="serverLoadIndicator"/>
+        </HBox>
+    </bottom>
+    <padding>
+        <Insets bottom="50"/>
+    </padding>
+</BorderPane>

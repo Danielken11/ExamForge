@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane prefWidth="500" fx:id="signUpPane" stylesheets="@assets/signStyle.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examforge.SignUpController" >
+    <padding>
+        <Insets top="80" />
+    </padding>
+    <top>
+        <HBox alignment="CENTER" fx:id="mainBox">
+            <Label text="SIGN-UP" fx:id="label2" />
+        </HBox>
+    </top>
+    <center>
+        <GridPane vgap="20" hgap="10" fx:id="gridPane">
+            <padding>
+                <Insets left="100" top="50"/>
+            </padding>
+            <TextField GridPane.rowIndex="0" fx:id="emailNew" promptText="E-mail"/>
+            <TextField GridPane.rowIndex="1" fx:id="loginNew" promptText="Login"/>
+            <PasswordField GridPane.rowIndex="2" fx:id="passwordNew" promptText="Password"/>
+            <CheckBox fx:id="showPassword" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            <HBox alignment="CENTER" GridPane.rowIndex="4">
+                <Button  fx:id="signButton" onAction="#signUP">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@assets/icons8-login-50.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </HBox>
+        </GridPane>
+    </center>
+    <bottom>
+        <VBox>
+            <HBox>
+                <padding>
+                    <Insets bottom="95" left="30"/>
+                </padding>
+                <Label fx:id="msgLabel" text="Error!!!"/>
+            </HBox>
+            <HBox alignment="CENTER">
+                <padding>
+                    <Insets bottom="30"/>
+                </padding>
+                <Label fx:id="loginLabel" text="Login?" onMouseClicked="#loginScene"/>
+            </HBox>
+        </VBox>
+    </bottom>
+</BorderPane>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="mainView" stylesheets="@assets/loginStyle.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examforge.LoginController">
+    <left>
+        <BorderPane prefWidth="500" fx:id="loginPane">
+            <padding>
+                <Insets top="80" />
+            </padding>
+            <top>
+                <HBox alignment="CENTER" fx:id="mainHbox">
+                    <Label fx:id="label1" text="LOGIN" />
+                </HBox>
+            </top>
+            <center>
+                <GridPane vgap="20" hgap="10" fx:id="gridPane">
+                    <padding>
+                        <Insets left="100" top="50" />
+                    </padding>
+                    <TextField fx:id="login" promptText="Login" GridPane.rowIndex="0" />
+                    <PasswordField fx:id="password" promptText="Password" GridPane.rowIndex="1" />
+                    <CheckBox fx:id="showPassword" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <HBox alignment="CENTER" GridPane.rowIndex="3">
+                        <Button fx:id="loginButton" onAction="#login">
+                            <graphic>
+                                <ImageView>
+                                    <image>
+                                        <Image url="@assets/icons8-login-50.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </HBox>
+                </GridPane>
+            </center>
+            <bottom>
+                <VBox>
+                    <HBox>
+                        <padding>
+                            <Insets bottom="95" left="30"/>
+                        </padding>
+                        <Label fx:id="msgLabel" text="Error!!!"/>
+                    </HBox>
+                <HBox alignment="CENTER">
+                    <padding>
+                        <Insets bottom="30" />
+                    </padding>
+                    <Label fx:id="signUPlabel" onMouseClicked="#signUPScene" text="Sign-up?" />
+                </HBox>
+                </VBox>
+            </bottom>
+        </BorderPane>
+    </left>
+    <right>
+        <BorderPane fx:id="bgImageCase" prefWidth="500">
+            <top>
+                <HBox fx:id="topBar" prefHeight="30" prefWidth="500" alignment="CENTER_RIGHT">
+                    <padding>
+                        <Insets right="30"/>
+                    </padding>
+                    <Button fx:id="closeButton" prefWidth="35" prefHeight="35">
+                        <graphic>
+                            <ImageView>
+                                <image>
+                                    <Image url="@assets/icons8-cross-35.png"/>
+                                </image>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </HBox>
+            </top>
+            <center>
+                <ImageView>
+                    <image>
+                        <Image url="@assets/Logo.png" />
+                    </image>
+                </ImageView>
+            </center>
+        </BorderPane>
+    </right>
+</BorderPane>

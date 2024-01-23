@@ -1,0 +1,52 @@
+.root{
+    -fx-background-color: linear-gradient(to bottom, #443D40, #494954);
+}
+#label1{
+    -fx-text-fill: white;
+    -fx-font-size: 25px;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+}
+#login,#password{
+    -fx-background-color: #706f6f;
+    -fx-text-fill: white;
+    -fx-pref-width: 280;
+    -fx-pref-height: 35;
+    -fx-background-radius: 9;
+    -fx-font-weight: bold;
+}
+#loginButton{
+   -fx-background-color: transparent;
+}
+#closeButton{
+    -fx-background-color:transparent;
+}
+#bgImageCase{
+    -fx-background-color: #252121;
+}
+#signUPlabel{
+    -fx-text-fill: white;
+    -fx-font-size: 15;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+}
+#signUPlabel:hover{
+    -fx-text-fill: #6b6a6a;
+}
+#showPassword .box{
+    -fx-background-color: #706f6f;
+}
+#showPassword:selected .mark{
+    -fx-background-color: black;
+}
+#mainHbox{
+    -fx-background-color: #252121;
+    -fx-pref-height: 50;
+    -fx-pref-width: 20;
+}
+#msgLabel{
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+}
