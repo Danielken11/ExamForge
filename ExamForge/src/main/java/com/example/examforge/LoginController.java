@@ -43,7 +43,7 @@ public void setStage(Stage stage) {
     this.stage = stage;
 }
 
-public void initialize() throws IOException {
+public void initialize(){
 
     buttonInteraction(loginButton);
     buttonInteraction(closeButton);
@@ -65,6 +65,7 @@ public void initialize() throws IOException {
     gridPane.setConstraints(passwordShowLabel,0,1);
     gridPane.getChildren().addAll(passwordShowLabel);
     passwordShowLabel.setVisible(false);
+
   showPassword.setOnAction(actionEvent -> {
       if(showPassword.isSelected()){
           password.setVisible(false);
@@ -76,9 +77,6 @@ public void initialize() throws IOException {
           passwordShowLabel.setVisible(false);
       }
   });
-
-
-
 
     BooleanBinding emptyFields = login.textProperty().isEmpty()
             .or(password.textProperty().isEmpty());
@@ -116,9 +114,11 @@ public void initialize() throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("root-view.fxml"));
     root = loader.load();
 
-    Scene scene = new Scene(root,1000,600);
+    Scene scene = new Scene(root,1150,700);
     rootStage.setScene(scene);
     rootStage.initStyle(StageStyle.UNDECORATED);
+    rootStage.setOpacity(0.99);
+    rootStage.setTitle("ExamForge");
 
     rootStage.show();
     stage.close();

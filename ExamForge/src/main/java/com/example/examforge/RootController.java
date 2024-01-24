@@ -1,24 +1,16 @@
 package com.example.examforge;
-
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class RootController {
 
@@ -30,11 +22,18 @@ public class RootController {
     Button closeButton;
 @FXML
     HBox topBar;
+@FXML
+    Button dashButton;
+@FXML
+    BorderPane rootBorder;
+@FXML
+    BorderPane mainView;
 
 private Stage stage;
 private double xOffset;
 private double yOffset;
 private boolean isMaximized = false;
+private Parent root;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -60,8 +59,9 @@ private boolean isMaximized = false;
             if (isMaximized) {
                 stage.setX(xOffset);
                 stage.setY(yOffset);
-                stage.setWidth(1000);
-                stage.setHeight(600);
+                stage.setWidth(1150);
+                stage.setHeight(700);
+                stage.setOpacity(0.99);
             } else {
                 Screen screen = Screen.getPrimary();
                 stage.setX(screen.getVisualBounds().getMinX());
@@ -70,6 +70,7 @@ private boolean isMaximized = false;
                 stage.setHeight(screen.getVisualBounds().getHeight());
                 xOffset = stage.getX();
                 yOffset = stage.getY();
+                stage.setOpacity(1.0);
             }
             isMaximized = !isMaximized;
         });
@@ -78,6 +79,33 @@ private boolean isMaximized = false;
             stage.close();
         });
 
+}
+
+@FXML
+    private void dashScene(){
+    rootBorder.setCenter(mainView);
+
+}
+
+@FXML
+    private void dataScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("data-view.fxml"));
+        root = loader.load();
+        rootBorder.setCenter(root);
+
+
+}
+@FXML
+    private void generateScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("generator-view.fxml"));
+        root = loader.load();
+        rootBorder.setCenter(root);
+}
+@FXML
+    private void settingsScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("settings-view.fxml"));
+        root = loader.load();
+        rootBorder.setCenter(root);
 }
 
 

@@ -9,13 +9,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<BorderPane prefWidth="500" fx:id="signUpPane" stylesheets="@assets/signStyle.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examforge.SignUpController" >
+<BorderPane prefWidth="500" fx:id="signUpPane" stylesheets="@assets/styles/signStyle.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examforge.SignUpController" >
     <padding>
         <Insets top="80" />
     </padding>
     <top>
         <HBox alignment="CENTER" fx:id="mainBox">
-            <Label text="SIGN-UP" fx:id="label2" />
+            <Label text="SIGN-UP" fx:id="label2"/>
         </HBox>
     </top>
     <center>
@@ -27,12 +27,31 @@
             <TextField GridPane.rowIndex="1" fx:id="loginNew" promptText="Login"/>
             <PasswordField GridPane.rowIndex="2" fx:id="passwordNew" promptText="Password"/>
             <CheckBox fx:id="showPassword" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            <ImageView fx:id="questionImage" GridPane.rowIndex="2" GridPane.columnIndex="2" onMouseEntered="#showReq">
+                <image>
+                    <Image url="@assets/login/requireIco.png"/>
+                </image>
+            </ImageView>
+            <BorderPane fx:id="infoPane" GridPane.rowIndex="2" GridPane.columnIndex="0">
+              <center>
+                  <HBox alignment="CENTER">
+                      <GridPane hgap="5" alignment="CENTER">
+                          <Label text="Min 8 characters,1 number" fx:id="requireLabel" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                          <ImageView GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="reqUndefined">
+                              <image>
+                                  <Image url="@assets/login/uncompleted.png"/>
+                              </image>
+                          </ImageView>
+                      </GridPane>
+                  </HBox>
+              </center>
+            </BorderPane>
             <HBox alignment="CENTER" GridPane.rowIndex="4">
                 <Button  fx:id="signButton" onAction="#signUP">
                     <graphic>
                         <ImageView>
                             <image>
-                                <Image url="@assets/icons8-login-50.png"/>
+                                <Image url="@assets/login/icons8-login-50.png"/>
                             </image>
                         </ImageView>
                     </graphic>
@@ -46,7 +65,7 @@
                 <padding>
                     <Insets bottom="95" left="30"/>
                 </padding>
-                <Label fx:id="msgLabel" text="Error!!!"/>
+                <Label fx:id="msgLabel" />
             </HBox>
             <HBox alignment="CENTER">
                 <padding>

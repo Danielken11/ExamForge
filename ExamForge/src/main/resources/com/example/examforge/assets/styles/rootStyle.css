@@ -1,0 +1,117 @@
+.root{
+    -fx-background-color: linear-gradient(to bottom, #443D40, #494954);
+}
+.button{
+    -fx-border-radius: 0;
+}
+#topBar{
+    -fx-background-color: #1c1c1c;
+}
+#minimizeButton{
+    -fx-background-color:#1c1c1c;
+}
+#maximizeButton{
+    -fx-background-color:#1c1c1c;
+}
+#closeButton{
+    -fx-background-color:#1c1c1c;
+}
+#appNameLabel{
+    -fx-text-fill: rgb(128, 128, 128);
+    -fx-font-family: Inter;
+    -fx-font-weight: bold;
+}
+#minimizeButton:hover{
+    -fx-background-color: #3a3939;
+    -fx-opacity: 0.6;
+    -fx-border-color: #724872;
+}
+#maximizeButton:hover{
+    -fx-background-color:#3a3939;
+    -fx-opacity: 0.6;
+    -fx-border-color: #724872;
+}
+#closeButton:hover{
+    -fx-background-color: #ff3a3a;
+    -fx-border-color: #ff3a3a;
+}
+#sideBar{
+   -fx-background-color:  linear-gradient(to bottom, #443D40, #494954);
+
+    -fx-pref-width: 260;
+    -fx-pref-height: 700;
+    -fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.5), 30, 0, 0, 0);
+    -fx-background-radius: 0 20 20 0;
+}
+#dashButton,#dataButton,#generateButton,#settingsButton{
+    -fx-pref-width: 260;
+    -fx-pref-height: 50;
+    -fx-background-color:transparent;
+    -fx-text-fill: white;
+    -fx-font-family: Verdana,sans-serif;
+    -fx-font-size: 10;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12;
+    -fx-graphic-text-gap: 35;
+}
+
+#dashButton:hover,#dataButton:hover,#generateButton:hover,#settingsButton:hover{
+    -fx-background-color:#494954 ;
+}
+#connectionLabel{
+    -fx-font-size: 9;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-family: Arial;
+}
+#statusLabel{
+    -fx-font-size: 9;
+    -fx-text-fill: #30b430;
+    -fx-font-weight: bold;
+    -fx-font-family: Arial;
+}
+#mainView{
+    -fx-pref-width: 890;
+}
+#profilePane,#infoPane{
+    -fx-pref-width: 400;
+    -fx-pref-height: 300;
+    -fx-max-height: 300;
+    -fx-max-width: 400;
+
+    -fx-background-color:  linear-gradient(to bottom, #524b4e, #686870);
+    -fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.5), 30, 0, 0, 0);
+
+
+    -fx-background-radius: 12;
+}
+#appPane{
+    -fx-pref-width: 800;
+    -fx-max-width: 800;
+    -fx-pref-height: 300;
+    -fx-max-height: 300;
+
+    -fx-background-color:  linear-gradient(to bottom, #524b4e, #686870);
+    -fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.5), 30, 0, 0, 0);
+
+
+    -fx-background-radius: 12;
+}
+@media screen and (min-width:1150px){
+    #appPane{
+        -fx-padding:0 0 30 40;
+    }
+}
+#label1{
+    -fx-font-size: 11;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-family: Verdana,sans-serif;
+    -fx-opacity: 0.50;
+}
+#emailDetail,#loginDetail{
+    -fx-font-family: Verdana,sans-serif;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 10;
+}

@@ -12,8 +12,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.GridPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.examforge.RootController" stylesheets="@assets/rootStyle.css">
+            fx:controller="com.example.examforge.RootController" stylesheets="@assets/styles/rootStyle.css" fx:id="rootBorder">
   <top>
     <HBox fx:id="topBar" prefHeight="28.0" prefWidth="1000">
       <children>
@@ -43,7 +44,7 @@
             <graphic>
               <ImageView>
                 <image>
-                  <Image url="@assets/minimizeImage.png" />
+                  <Image url="@assets/root/minimizeImage.png" />
                 </image>
               </ImageView>
             </graphic>
@@ -57,7 +58,7 @@
             <graphic>
               <ImageView>
                 <image>
-                  <Image url="@assets/maximizeImage.png" />
+                  <Image url="@assets/root/maximizeImage.png" />
                 </image>
               </ImageView>
             </graphic>
@@ -71,7 +72,7 @@
             <graphic>
               <ImageView>
                 <image>
-                  <Image url="@assets/closeImage.png" />
+                  <Image url="@assets/root/closeImage.png" />
                 </image>
               </ImageView>
             </graphic>
@@ -83,6 +84,129 @@
       </children>
     </HBox>
   </top>
+  <left>
+      <VBox fx:id="sideBar" spacing="20">
+          <HBox>
+              <padding>
+                  <Insets top="30" left="10"/>
+              </padding>
+              <GridPane hgap="10">
+                  <ImageView GridPane.rowIndex="0" GridPane.columnIndex="0">
+                      <image>
+                          <Image url="@assets/root/wired-outline-153-bar-chart.gif"/>
+                      </image>
+                  </ImageView>
+                  <Label fx:id="connectionLabel" text="Status" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                  <Label fx:id="statusLabel" text="connected" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+              </GridPane>
+          </HBox>
+            <HBox>
+                <padding>
+                    <Insets top="70"/>
+                </padding>
+                   <Button fx:id="dashButton" text="DASHBOARD" alignment="CENTER_LEFT" onAction="#dashScene">
+                       <graphic>
+                           <ImageView>
+                               <image>
+                                   <Image url="@assets/root/icons8-person-24.png"/>
+                               </image>
+                           </ImageView>
+                       </graphic>
+                   </Button>
+            </HBox>
+            <HBox >
+                <Button fx:id="dataButton" text="DATA" alignment="CENTER_LEFT" onAction="#dataScene">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@assets/root/icons8-database-24.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <alignment>
+                    </alignment>
+                </Button>
+            </HBox>
+          <HBox>
+              <Button fx:id="generateButton" text="GENERATE" alignment="CENTER_LEFT" onAction="#generateScene">
+                  <graphic>
+                      <ImageView>
+                          <image>
+                              <Image url="@assets/root/icons8-mechanistic-analysis-24.png"/>
+                          </image>
+                      </ImageView>
+                  </graphic>
+              </Button>
+          </HBox>
+          <HBox>
+              <padding>
+                  <Insets top="200"/>
+              </padding>
+              <Button fx:id="settingsButton" text="SETTINGS" alignment="CENTER_LEFT" onAction="#settingsScene">
+                  <graphic>
+                      <ImageView>
+                          <image>
+                              <Image url="@assets/root/icons8-settings-24.png"/>
+                          </image>
+                      </ImageView>
+                  </graphic>
+              </Button>
+          </HBox>
+      </VBox>
+  </left>
+    <center>
+        <BorderPane fx:id="mainView">
+            <padding>
+                <Insets top="30" left="40"/>
+            </padding>
+            <top>
+                <HBox spacing="30">
+                    <Pane fx:id="profilePane">
+                        <BorderPane>
+                            <padding>
+                                <Insets top="12" left="20" />
+                            </padding>
+                            <top>
+                                <Label fx:id="label1" text="#account"/>
+                            </top>
+                            <center>
+                                <HBox spacing="10">
+                                    <padding>
+                                        <Insets top="25"/>
+                                    </padding>
+                                    <GridPane hgap="12" vgap="12">
+                                        <ImageView GridPane.rowIndex="0" GridPane.columnIndex="0">
+                                            <image>
+                                                <Image url="@assets/root/icons8-email-24.png"/>
+                                            </image>
+                                        </ImageView>
+                                        <Label fx:id="emailDetail" text="E-mail" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                        <ImageView GridPane.rowIndex="1" GridPane.columnIndex="0">
+                                            <image>
+                                                <Image url="@assets/root/icons8-avatar-24.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Label fx:id="loginDetail" text="Login" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                    </GridPane>
+                                </HBox>
+                            </center>
+                        </BorderPane>
+                    </Pane>
+                    <Pane fx:id="infoPane">
 
+                    </Pane>
+                </HBox>
+            </top>
+            <bottom>
+                <HBox>
+                    <padding>
+                        <Insets bottom="20" left="15"/>
+                    </padding>
+                    <Pane fx:id="appPane">
 
+                    </Pane>
+                </HBox>
+            </bottom>
+        </BorderPane>
+    </center>
 </BorderPane>

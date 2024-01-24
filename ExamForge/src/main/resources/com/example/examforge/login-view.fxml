@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="mainView" stylesheets="@assets/loginStyle.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examforge.LoginController">
+<BorderPane fx:id="mainView" stylesheets="@assets/styles/loginStyle.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examforge.LoginController">
     <left>
         <BorderPane prefWidth="500" fx:id="loginPane">
             <padding>
@@ -28,7 +28,7 @@
                             <graphic>
                                 <ImageView>
                                     <image>
-                                        <Image url="@assets/icons8-login-50.png" />
+                                        <Image url="@assets/login/icons8-login-50.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -42,7 +42,7 @@
                         <padding>
                             <Insets bottom="95" left="30"/>
                         </padding>
-                        <Label fx:id="msgLabel" text="Error!!!"/>
+                        <Label fx:id="msgLabel" />
                     </HBox>
                 <HBox alignment="CENTER">
                     <padding>
@@ -65,7 +65,7 @@
                         <graphic>
                             <ImageView>
                                 <image>
-                                    <Image url="@assets/icons8-cross-35.png"/>
+                                    <Image url="@assets/login/icons8-cross-35.png"/>
                                 </image>
                             </ImageView>
                         </graphic>
@@ -75,7 +75,7 @@
             <center>
                 <ImageView>
                     <image>
-                        <Image url="@assets/Logo.png" />
+                        <Image url="@assets/login/Logo.png" />
                     </image>
                 </ImageView>
             </center>

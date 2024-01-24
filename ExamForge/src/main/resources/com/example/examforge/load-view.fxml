@@ -4,12 +4,12 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
-<BorderPane stylesheets="@assets/loadStyle.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.example.examforge.LoadingController">
+<BorderPane stylesheets="@assets/styles/loadStyle.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.example.examforge.LoadingController">
     <top>
         <HBox alignment="CENTER">
             <ImageView>
                 <image>
-                    <Image url="@assets/Logo.png" />
+                    <Image url="@assets/login/Logo.png" />
                 </image>
             </ImageView>
         </HBox>
