@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -13,10 +11,17 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.GridPane?>
+<?import com.example.examforge.CustomProgressIndicator?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.CategoryAxis?>
+
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.examforge.RootController" stylesheets="@assets/styles/rootStyle.css" fx:id="rootBorder">
   <top>
-    <HBox fx:id="topBar" prefHeight="28.0" prefWidth="1000">
+    <HBox fx:id="topBar" prefHeight="28.0" maxHeight="28.0" prefWidth="1150" maxWidth="1150">
       <children>
         <StackPane>
           <padding>
@@ -54,20 +59,6 @@
           </padding>
         </Pane>
         <Pane prefHeight="27" prefWidth="35.0">
-          <Button fx:id="maximizeButton" alignment="CENTER_RIGHT" layoutX="4.0" prefHeight="27.0" prefWidth="31.0">
-            <graphic>
-              <ImageView>
-                <image>
-                  <Image url="@assets/root/maximizeImage.png" />
-                </image>
-              </ImageView>
-            </graphic>
-          </Button>
-          <padding>
-            <Insets right="0.0" />
-          </padding>
-        </Pane>
-        <Pane prefHeight="27" prefWidth="35.0">
           <Button fx:id="closeButton" alignment="CENTER_RIGHT" layoutX="4.0" prefHeight="27.0" prefWidth="31.0">
             <graphic>
               <ImageView>
@@ -93,11 +84,11 @@
               <GridPane hgap="10">
                   <ImageView GridPane.rowIndex="0" GridPane.columnIndex="0">
                       <image>
-                          <Image url="@assets/root/wired-outline-153-bar-chart.gif"/>
+                          <Image url="@assets/root/icons8-connection-18.png"/>
                       </image>
                   </ImageView>
-                  <Label fx:id="connectionLabel" text="Status" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-                  <Label fx:id="statusLabel" text="connected" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                  <Label fx:id="connectionLabel" text="Server status" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                  <Label fx:id="statusLabel" text="disconnected" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
               </GridPane>
           </HBox>
             <HBox>
@@ -105,10 +96,13 @@
                     <Insets top="70"/>
                 </padding>
                    <Button fx:id="dashButton" text="DASHBOARD" alignment="CENTER_LEFT" onAction="#dashScene">
+                       <padding>
+                           <Insets left="20"/>
+                       </padding>
                        <graphic>
                            <ImageView>
                                <image>
-                                   <Image url="@assets/root/icons8-person-24.png"/>
+                                   <Image url="@assets/root/dashboard.png"/>
                                </image>
                            </ImageView>
                        </graphic>
@@ -116,10 +110,13 @@
             </HBox>
             <HBox >
                 <Button fx:id="dataButton" text="DATA" alignment="CENTER_LEFT" onAction="#dataScene">
+                    <padding>
+                        <Insets left="20"/>
+                    </padding>
                     <graphic>
                         <ImageView>
                             <image>
-                                <Image url="@assets/root/icons8-database-24.png"/>
+                                <Image url="@assets/root/dataIco.png"/>
                             </image>
                         </ImageView>
                     </graphic>
@@ -129,10 +126,13 @@
             </HBox>
           <HBox>
               <Button fx:id="generateButton" text="GENERATE" alignment="CENTER_LEFT" onAction="#generateScene">
+                  <padding>
+                      <Insets left="20"/>
+                  </padding>
                   <graphic>
                       <ImageView>
                           <image>
-                              <Image url="@assets/root/icons8-mechanistic-analysis-24.png"/>
+                              <Image url="@assets/root/icons8-hammer-24.png"/>
                           </image>
                       </ImageView>
                   </graphic>
@@ -143,10 +143,13 @@
                   <Insets top="200"/>
               </padding>
               <Button fx:id="settingsButton" text="SETTINGS" alignment="CENTER_LEFT" onAction="#settingsScene">
+                  <padding>
+                      <Insets left="20"/>
+                  </padding>
                   <graphic>
                       <ImageView>
                           <image>
-                              <Image url="@assets/root/icons8-settings-24.png"/>
+                              <Image url="@assets/root/settingsIco.png"/>
                           </image>
                       </ImageView>
                   </graphic>
@@ -157,53 +160,135 @@
     <center>
         <BorderPane fx:id="mainView">
             <padding>
-                <Insets top="30" left="40"/>
+                <Insets top="30"/>
             </padding>
             <top>
-                <HBox spacing="30">
+                <HBox spacing="30" alignment="CENTER">
                     <Pane fx:id="profilePane">
                         <BorderPane>
                             <padding>
-                                <Insets top="12" left="20" />
+                                <Insets top="12" left="15" />
                             </padding>
                             <top>
-                                <Label fx:id="label1" text="#account"/>
+                                <HBox alignment="CENTER_LEFT">
+                                    <Label fx:id="label1" text="#account"/>
+                                    <Region fx:id="r1"/>
+                                    <Button fx:id="changeButton">
+                                        <graphic>
+                                            <ImageView>
+                                                <image>
+                                                    <Image url="@assets/root/dot-ico.png"/>
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
+                                    </Button>
+                                </HBox>
                             </top>
                             <center>
                                 <HBox spacing="10">
                                     <padding>
-                                        <Insets top="25"/>
+                                        <Insets top="25" left="20"/>
                                     </padding>
-                                    <GridPane hgap="12" vgap="12">
-                                        <ImageView GridPane.rowIndex="0" GridPane.columnIndex="0">
-                                            <image>
-                                                <Image url="@assets/root/icons8-email-24.png"/>
-                                            </image>
-                                        </ImageView>
-                                        <Label fx:id="emailDetail" text="E-mail" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-                                        <ImageView GridPane.rowIndex="1" GridPane.columnIndex="0">
-                                            <image>
-                                                <Image url="@assets/root/icons8-avatar-24.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Label fx:id="loginDetail" text="Login" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                    <GridPane vgap="25">
+                                        <HBox GridPane.rowIndex="0" spacing="12" fx:id="h1" alignment="CENTER_LEFT">
+                                            <padding>
+                                                <Insets left="10"/>
+                                            </padding>
+                                            <ImageView>
+                                                <image>
+                                                    <Image url="@assets/root/icons8-email-24.png"/>
+                                                </image>
+                                            </ImageView>
+                                            <Label fx:id="d1" text="sebastianSebas@gmail.com"/>
+                                        </HBox>
+                                        <HBox GridPane.rowIndex="1" spacing="12" fx:id="h2" alignment="CENTER_LEFT">
+                                            <padding>
+                                                <Insets left="10"/>
+                                            </padding>
+                                            <ImageView>
+                                                <image>
+                                                    <Image url="@assets/root/loginIco.png"/>
+                                                </image>
+                                            </ImageView>
+                                            <Label fx:id="d2" text="Feanor11" />
+                                        </HBox>
+                                        <HBox GridPane.rowIndex="2" spacing="12" fx:id="h3" alignment="CENTER_LEFT">
+                                            <padding>
+                                                <Insets left="10"/>
+                                            </padding>
+                                            <Label fx:id="statusDetail" text="status" />
+                                            <Label fx:id="d3" text="Admin" />
+                                        </HBox>
                                     </GridPane>
                                 </HBox>
                             </center>
                         </BorderPane>
                     </Pane>
                     <Pane fx:id="infoPane">
-
+                        <BorderPane>
+                        <padding>
+                            <Insets top="12" left="15" />
+                        </padding>
+                        <top>
+                            <HBox alignment="CENTER_LEFT">
+                                <Label fx:id="label1" text="#statistic"/>
+                                <Region fx:id="r1"/>
+                                <Button fx:id="changeButton2">
+                                    <graphic>
+                                        <ImageView>
+                                            <image>
+                                                <Image url="@assets/root/dot-ico.png"/>
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                            </HBox>
+                        </top>
+                            <center>
+                                <GridPane fx:id="statsGrid" hgap="25" vgap="40">
+                                    <padding>
+                                        <Insets left="50" top="35"/>
+                                    </padding>
+                                    <CustomProgressIndicator  fx:id="prg1" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                    <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" spacing="10" fx:id="v1">
+                                        <padding>
+                                            <Insets top="15" left="10"/>
+                                        </padding>
+                                        <Label fx:id="percentage" text="70"/>
+                                        <Label fx:id="f1" text="App usage" />
+                                    </VBox>
+                                    <CustomProgressIndicator fx:id="prg2" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                    <VBox GridPane.rowIndex="1" GridPane.columnIndex="1" spacing="10" fx:id="v1">
+                                        <padding>
+                                            <Insets top="15" left="10"/>
+                                        </padding>
+                                        <Label fx:id="percentage" text="90"/>
+                                        <Label fx:id="f1" text="updated data" />
+                                    </VBox>
+                                </GridPane>
+                            </center>
+                        </BorderPane>
                     </Pane>
                 </HBox>
             </top>
             <bottom>
-                <HBox>
+                <HBox alignment="CENTER">
                     <padding>
-                        <Insets bottom="20" left="15"/>
+                        <Insets bottom="20" />
                     </padding>
                     <Pane fx:id="appPane">
-
+                        <BorderPane fx:id="grafBorder">
+                            <center>
+                                <AreaChart fx:id="dataBaseChart" legendVisible="false" createSymbols="false" >
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" fx:id="n1" />
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis side="LEFT" lowerBound="10" upperBound="50" tickUnit="10" fx:id="n2"/>
+                                    </yAxis>
+                                </AreaChart>
+                            </center>
+                        </BorderPane>
                     </Pane>
                 </HBox>
             </bottom>

@@ -26,7 +26,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("login-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("load-view.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root, 1000, 600);
         scene.setOnMousePressed(this::onMousePressed);
@@ -37,8 +37,8 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
 
-        LoginController loginController = loader.getController();
-        loginController.setStage(stage);
+        LoadingController loadingController = loader.getController();
+        loadingController.setStage(stage);
 
 
 //For the connection to the server after the start of the loading screen we need to create a thread with the progress indicator...

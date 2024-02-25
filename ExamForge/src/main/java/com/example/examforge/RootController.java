@@ -2,24 +2,25 @@ package com.example.examforge;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Screen;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Ellipse;
 import javafx.stage.Stage;
-
+import javafx.util.Duration;
 import java.io.IOException;
-
 
 public class RootController {
 
 @FXML
-    Button minimizeButton;
-@FXML
-    Button maximizeButton;
-@FXML
-    Button closeButton;
+    Button minimizeButton,closeButton;
 @FXML
     HBox topBar;
 @FXML
@@ -28,11 +29,24 @@ public class RootController {
     BorderPane rootBorder;
 @FXML
     BorderPane mainView;
+@FXML
+    Button settingsButton;
+@FXML
+    GridPane statsGrid;
+@FXML
+    CustomProgressIndicator prg1,prg2;
+@FXML
+    AreaChart<String,Number> dataBaseChart;
+@FXML
+    CategoryAxis n1;
+@FXML
+    NumberAxis n2;
+@FXML
+    Button changeButton,changeButton2;
 
 private Stage stage;
 private double xOffset;
 private double yOffset;
-private boolean isMaximized = false;
 private Parent root;
 
     public void setStage(Stage stage) {
@@ -41,44 +55,55 @@ private Parent root;
 
     public void initialize(){
 
-        topBar.setOnMousePressed((MouseEvent event) -> {
-            xOffset = event.getSceneX();
-            yOffset = event.getSceneY();
-        });
+        Ellipse ellipse = new Ellipse();
 
-        topBar.setOnMouseDragged((MouseEvent event) -> {
-            stage.setX(event.getScreenX() - xOffset);
-            stage.setY(event.getScreenY() - yOffset);
-        });
+        changeButton.setShape(ellipse);
+        changeButton2.setShape(ellipse);
 
-        minimizeButton.setOnAction(event -> {
-            stage.setIconified(true);
-        });
+    topBar.setOnMousePressed((MouseEvent event) -> {
+         xOffset = event.getSceneX();
+         yOffset = event.getSceneY();
+});
 
-        maximizeButton.setOnAction(event -> {
-            if (isMaximized) {
-                stage.setX(xOffset);
-                stage.setY(yOffset);
-                stage.setWidth(1150);
-                stage.setHeight(700);
-                stage.setOpacity(0.99);
-            } else {
-                Screen screen = Screen.getPrimary();
-                stage.setX(screen.getVisualBounds().getMinX());
-                stage.setY(screen.getVisualBounds().getMinY());
-                stage.setWidth(screen.getVisualBounds().getWidth());
-                stage.setHeight(screen.getVisualBounds().getHeight());
-                xOffset = stage.getX();
-                yOffset = stage.getY();
-                stage.setOpacity(1.0);
-            }
-            isMaximized = !isMaximized;
-        });
+    topBar.setOnMouseDragged((MouseEvent event) -> {
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
+});
 
-        closeButton.setOnAction(event -> {
-            stage.close();
-        });
+    minimizeButton.setOnAction(event -> {
+        stage.setIconified(true);
+});
 
+    closeButton.setOnAction(event -> {
+        stage.close();
+});
+
+    prg1.setColor(Color.web("#8f3e8f"));
+    prg2.setColor(Color.WHITE);
+    prg1.setProgress(0.7);
+    prg2.setProgress(0.9);
+
+    XYChart.Series<String, Number> series = new XYChart.Series<>();
+    series.getData().add(new XYChart.Data<>("Jan",Math.random() * (50-10) + 10));
+    series.getData().add(new XYChart.Data<>("Feb",Math.random() * (50-10) + 10));
+    series.getData().add(new XYChart.Data<>("Mar",Math.random() * (50-10) + 10));
+    series.getData().add(new XYChart.Data<>("Apr",Math.random() * (50-10) + 10));
+    series.getData().add(new XYChart.Data<>("May",Math.random() * (50-10) + 10));
+    series.getData().add(new XYChart.Data<>("Jun",Math.random() * (50-10) + 10));
+    series.getData().add(new XYChart.Data<>("Jul",Math.random() * (50-10) + 10));
+    series.getData().add(new XYChart.Data<>("Aug",Math.random() * (50-10) + 10));
+    series.getData().add(new XYChart.Data<>("Sep",Math.random() * (50-10) + 10));
+    series.getData().add(new XYChart.Data<>("Oct",Math.random() * (50-10) + 10));
+    series.getData().add(new XYChart.Data<>("Nov",Math.random() * (50-10) + 10));
+    series.getData().add(new XYChart.Data<>("Dec",Math.random() * (50-10) + 10));
+
+        n1.setTickLabelFill(Color.GRAY);
+        n2.setTickLabelFill(Color.GRAY);
+
+        n1.setTickMarkVisible(false);
+        n2.setTickMarkVisible(false);
+
+        dataBaseChart.getData().add(series);
 }
 
 @FXML
@@ -87,13 +112,22 @@ private Parent root;
 
 }
 
+    private void slideTransition(Parent root) {
+
+        javafx.animation.TranslateTransition transition = new javafx.animation.TranslateTransition(Duration.seconds(0.5), root);
+
+        root.setTranslateY(mainView.getWidth());
+
+        transition.setToY(0);
+
+        transition.play();
+    }
+
 @FXML
     private void dataScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("data-view.fxml"));
         root = loader.load();
         rootBorder.setCenter(root);
-
-
 }
 @FXML
     private void generateScene() throws IOException {
@@ -105,8 +139,9 @@ private Parent root;
     private void settingsScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("settings-view.fxml"));
         root = loader.load();
+        slideTransition(root);
         rootBorder.setCenter(root);
-}
 
 
+    }
 }

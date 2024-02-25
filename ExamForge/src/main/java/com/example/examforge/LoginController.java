@@ -6,8 +6,11 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.io.IOException;
@@ -38,9 +41,14 @@ public class LoginController {
 
 Parent root;
 private Stage stage;
+private Server server;
 
 public void setStage(Stage stage) {
     this.stage = stage;
+}
+
+public void setServer(Server server){
+    this.server = server;
 }
 
 public void initialize(){
@@ -82,6 +90,17 @@ public void initialize(){
             .or(password.textProperty().isEmpty());
 
     loginButton.disableProperty().bind(emptyFields);
+
+    loginPane.setOnKeyPressed(event->{
+        if(event.getCode() == KeyCode.ENTER && !loginButton.isDisable()){
+            try {
+                login();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    });
+
 }
 
     private void buttonInteraction(Button button){
@@ -106,17 +125,21 @@ public void initialize(){
 @FXML
     private void login() throws IOException {
 
-
-
-
-
     Stage rootStage = new Stage();
     FXMLLoader loader = new FXMLLoader(getClass().getResource("root-view.fxml"));
     root = loader.load();
 
+//Creating a clip with triangle for making stage with rounded corners ,because javafx don't have the implementation of custom windows decoration
+    root.setStyle("-fx-background-radius: 8;-fx-border-radius: 8");
+    Rectangle rect = new Rectangle(1150,700);
+    rect.setArcHeight(15.0);
+    rect.setArcWidth(15.0);
+    root.setClip(rect);
+
     Scene scene = new Scene(root,1150,700);
+    scene.setFill(Color.TRANSPARENT);
     rootStage.setScene(scene);
-    rootStage.initStyle(StageStyle.UNDECORATED);
+    rootStage.initStyle(StageStyle.TRANSPARENT);
     rootStage.setOpacity(0.99);
     rootStage.setTitle("ExamForge");
 

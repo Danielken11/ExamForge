@@ -6,9 +6,38 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.examforge.SettingsController"
-           >
-
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.examforge.SettingsController" fx:id="settingsMainView" stylesheets="@assets/styles/settings.style.css">
+    <center>
+        <GridPane vgap="40">
+            <padding>
+                <Insets top="40"/>
+            </padding>
+            <HBox fx:id="h1" GridPane.rowIndex="0" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="20"/>
+                </padding>
+                <Label text="Language"/>
+                <Region fx:id="r1" />
+                <ComboBox fx:id="combo1" />
+            </HBox>
+            <HBox fx:id="h2" GridPane.rowIndex="1" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="20"/>
+                </padding>
+                <Label text="Color-Mode"/>
+                <Region fx:id="r2" />
+                <ComboBox fx:id="combo2" />
+            </HBox>
+        </GridPane>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" fx:id="versionBox">
+            <padding>
+                <Insets bottom="30"/>
+            </padding>
+            <Label text="version 0.1" fx:id="versLabel"  alignment="CENTER"/>
+        </HBox>
+    </bottom>
 </BorderPane>

@@ -1,13 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.examforge.DataController">
-
+<BorderPane stylesheets="@assets/styles/dataStyle.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.examforge.DataController">
+    <padding>
+        <Insets top="30"/>
+    </padding>
+    <top>
+        <HBox alignment="CENTER">
+            <BorderPane fx:id="dataControlContainer">
+                <padding>
+                    <Insets left="15"/>
+                </padding>
+                        <left>
+                            <HBox alignment="CENTER">
+                                <Label text="Connected DB:" fx:id="l2"/>
+                            </HBox>
+                        </left>
+                        <center>
+                            <HBox alignment="CENTER">
+                                <ComboBox fx:id="comboTable" promptText="Select Table"/>
+                            </HBox>
+                        </center>
+            </BorderPane>
+        </HBox>
+    </top>
+    <center>
+        <HBox alignment="CENTER">
+            <BorderPane fx:id="tableContainer">
+                <center>
+                    <TableView fx:id="dataTable">
+                    </TableView>
+                </center>
+            </BorderPane>
+        </HBox>
+    </center>
 </BorderPane>
