@@ -9,6 +9,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
 
+import java.io.IOException;
+
 public class SignUpController{
 
 @FXML
@@ -38,6 +40,8 @@ BorderPane mainPane;
 BorderPane secondPane;
 TextField passwordShowLabel;
 
+public Server server;
+
 public void setPanes(BorderPane mainPane,BorderPane secondPane){
     this.mainPane = mainPane;
     this.secondPane = secondPane;
@@ -46,6 +50,10 @@ public void changeImage(ImageView name){
     Image newImage = new Image("com/example/examforge/assets/login/completedReq.png");
     name.setImage(newImage);
 }
+    public void setServer(Server server){
+        this.server = server;
+    }
+
 
 private static boolean validate(String passwd){
     if ((passwd.length() >=8) &&
@@ -95,7 +103,6 @@ public void initialize(){
         msgLabel.setText("meow");
     }
 
-
     BooleanBinding emptyFields = emailNew.textProperty().isEmpty()
             .or(loginNew.textProperty().isEmpty())
             .or(passwordNew.textProperty().isEmpty());
@@ -123,14 +130,11 @@ public void initialize(){
     }
 
 @FXML
-private void signUP(){
+private void signUP() throws IOException {
 
-    User newUser = new User(emailNew.getText().toString(),loginNew.getText().toString(),passwordNew.getText().toString());
-
+   server.sendQuery("INSERT INTO Users (Email,Login,Password) VALUES('" + emailNew.getText() + "','" + loginNew.getText() + "','" + passwordNew.getText() + "');");
     mainPane.setLeft(secondPane);
-
 }
-
 @FXML
 private void showReq(){
     infoPane.setVisible(true);
@@ -138,12 +142,8 @@ private void showReq(){
         infoPane.setVisible(false);
     });
 }
-
 @FXML
 public void loginScene(MouseEvent mouseEvent) {
-
     mainPane.setLeft(secondPane);
-
-
     }
 }

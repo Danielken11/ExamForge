@@ -1,7 +1,5 @@
 package com.example.examforge;
 
-import javafx.scene.layout.BorderPane;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -11,23 +9,30 @@ public class Server {
 
     public Socket socket;
     public ObjectOutputStream out;
-    public ObjectInputStream input;
-    public Boolean isConnected = false;
+    public ObjectInputStream in;
+    public Boolean connected = false;
+    public String result;
 
 public Server(){
     connect();
 }
 
+public void sendQuery(String query) throws IOException {
+    out.writeObject(query);
+}
+public void receiveQuery() throws IOException, ClassNotFoundException {
+    result = in.readObject().toString();
+}
     public void connect() {
         try {
             this.socket = new Socket("192.168.100.237", 19997);
             this.out = new ObjectOutputStream(socket.getOutputStream());
-            this.input = new ObjectInputStream(socket.getInputStream());
-            isConnected = true;
+            this.in = new ObjectInputStream(socket.getInputStream());
+            connected = true;
         } catch (IOException ex) {
             ex.printStackTrace();
             System.out.println("Connection Error");
+            this.connected = false;
         }
-
     }
 }

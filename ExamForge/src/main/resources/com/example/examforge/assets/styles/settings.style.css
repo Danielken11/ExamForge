@@ -1,0 +1,59 @@
+#settingsMainView{
+    -fx-pref-width: 800;
+    -fx-max-width: 800;
+    -fx-pref-height: 600;
+    -fx-max-height: 600;
+
+    -fx-background-color: rgba(37, 33, 33, 0.49);
+    -fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.5), 30, 0, 0, 0);
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-width: 1px;
+}
+.label{
+    -fx-font-size:12;
+    -fx-font-weight: bold;
+    -fx-font-family: Verdana,sans-serif;
+    -fx-text-fill: white;
+    -fx-pref-width: 200;
+}
+#versLabel{
+    -fx-opacity: 0.50;
+}
+#h1,#h2{
+    -fx-background-color: #494954;
+    -fx-pref-width: 800;
+    -fx-pref-height: 35;
+    -fx-background-radius: 0;
+    -fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.5), 30, 0, 0, 0);
+}
+#versionBox{
+    -fx-pref-width: 800;
+}
+#r1,#r2{
+    -fx-pref-width: 600;
+}
+.combo-box{
+    -fx-pref-width: 300;
+    -fx-pref-height: 30;
+    -fx-background-color: transparent;
+}
+.combo-box .arrow{
+    -fx-background-color: white;
+}
+.combo-box .list-cell:filled:selected,.combo-box .list-cell:filled{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-family: Verdana,sans-serif;
+}
+.combo-box-popup .list-view{
+    -fx-text-fill: white;
+    -fx-control-inner-background:#494954;
+    -fx-border-color: #494954;
+}
+.combo-box-popup .list-cell:selected:filled{
+    -fx-background-color: #383636;
+}
+.combo-box-popup .list-cell:hover{
+    -fx-background-color: #383636;
+}

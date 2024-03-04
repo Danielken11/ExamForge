@@ -1,0 +1,9 @@
+#generatorControlContainer1,#generatorControlContainer2{
+    -fx-background-color: rgba(37, 33, 33, 0.49);
+    -fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.5), 30, 0, 0, 0);
+    -fx-max-height: 280;
+    -fx-pref-height: 280;
+    -fx-pref-width: 850;
+    -fx-max-width: 850;
+    -fx-background-radius: 12;
+}

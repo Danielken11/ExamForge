@@ -1,0 +1,103 @@
+#dataControlContainer{
+    -fx-background-color: rgba(37, 33, 33, 0.49);
+    -fx-max-height: 100;
+    -fx-pref-height: 100;
+    -fx-pref-width: 850;
+    -fx-max-width: 850;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.5), 30, 0, 0, 0);
+}
+#centerContainer{
+    -fx-pref-width: 850;
+    -fx-max-width: 850;
+}
+#h1{
+    -fx-background-color: #494954;
+    -fx-pref-width: 240;
+    -fx-pref-height: 40;
+    -fx-max-width: 240;
+    -fx-max-height: 40;
+    -fx-effect: null;
+}
+#l1{
+    -fx-font-size: 10;
+    -fx-text-fill: white;
+    -fx-font-family: Verdana,sans-serif;
+    -fx-opacity: 0.50;
+    -fx-font-weight: bold;
+}
+#l2{
+    -fx-font-size: 12;
+    -fx-text-fill: white;
+    -fx-font-family: Verdana,sans-serif;
+    -fx-opacity: 0.50;
+    -fx-font-weight: bold;
+}
+#tableContainer{
+    -fx-pref-width: 850;
+    -fx-max-width: 850;
+    -fx-pref-height: 500;
+    -fx-max-height: 500;
+    -fx-background-color: transparent;
+}
+#dataTable{
+    -fx-background-color:  linear-gradient(to bottom, #524b4e, #686870);
+    -fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.5), 30, 0, 0, 0);
+    -fx-background-radius: 12;
+}
+#dataTable .column-header-background .filler {
+   -fx-background-color: transparent;
+}
+#dataTable .column-header-background  {
+    -fx-background-color:  linear-gradient(to top, #1f1e1e, #1c1c1c);
+    -fx-border-radius: 12 12 0 0;
+}
+#dataTable .column-header{
+    -fx-background-color: transparent;
+}
+.table-view .table-cell{
+    -fx-border-color: black;
+}
+.table-view .table-row-cell{
+    -fx-background-radius: 12;
+}
+.table-row-cell:hover {
+    -fx-background-color: transparent;
+    -fx-text-background-color: white;
+}
+.table-row-cell:odd{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell:even{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+#comboTable{
+    -fx-background-color: #494954;
+    -fx-pref-width: 240;
+    -fx-pref-height: 40;
+    -fx-max-width: 240;
+    -fx-max-height: 40;
+    -fx-effect: null;
+    -fx-background-radius: 12;
+}
+#comboTable .arrow{
+    -fx-background-color: white;
+}
+#comboTable .list-view{
+    -fx-text-fill: white;
+    -fx-control-inner-background:#494954;
+    -fx-border-color: #494954;
+}
+.combo-box-popup .list-view{
+    -fx-border-color:#494954 ;
+}
+#comboTable .list-cell:filled:selected,#comboTable .list-cell:filled{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size:10;
+    -fx-font-family: Verdana,sans-serif;
+}

@@ -149,6 +149,7 @@ public void initialize(){
     RootController rootController = loader.getController();
 
     rootController.setStage(rootStage);
+    rootController.setServer(server);
 }
 @FXML
     private void signUPScene() throws IOException {
@@ -156,8 +157,10 @@ public void initialize(){
        root = loader.load();
        mainView.setLeft(root);
 
+
        SignUpController signUpController = loader.getController();
        signUpController.setPanes(mainView,loginPane);
+       signUpController.setServer(server);
     }
 
 }

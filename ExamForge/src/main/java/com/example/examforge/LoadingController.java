@@ -79,7 +79,7 @@ public void initialize() throws IOException, InterruptedException {
               throw new RuntimeException(e);
           }
           server = new Server();
-          if(server.isConnected){
+          if(server.connected){
               isRunning = true;
               try {
                   runLoginView();
