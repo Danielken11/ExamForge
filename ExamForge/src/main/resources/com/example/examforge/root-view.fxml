@@ -18,6 +18,7 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.CategoryAxis?>
 
+<?import javafx.scene.control.ToggleButton?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.examforge.RootController" stylesheets="@assets/styles/rootStyle.css" fx:id="rootBorder">
   <top>
@@ -173,7 +174,13 @@
                                 <HBox alignment="CENTER_LEFT">
                                     <Label fx:id="label1" text="#account"/>
                                     <Region fx:id="r1"/>
-                                    <Button fx:id="changeButton">
+                                    <HBox fx:id="exitPaneBox">
+                                        <padding>
+                                            <Insets left="5"/>
+                                        </padding>
+                                        <Button fx:id="logOutButton" text="Sign-out?" onAction="#signOut"/>
+                                    </HBox>
+                                    <ToggleButton fx:id="changeButton" onAction="#exitPane">
                                         <graphic>
                                             <ImageView>
                                                 <image>
@@ -181,7 +188,7 @@
                                                 </image>
                                             </ImageView>
                                         </graphic>
-                                    </Button>
+                                    </ToggleButton>
                                 </HBox>
                             </top>
                             <center>
@@ -233,7 +240,10 @@
                             <HBox alignment="CENTER_LEFT">
                                 <Label fx:id="label1" text="#statistic"/>
                                 <Region fx:id="r1"/>
-                                <Button fx:id="changeButton2">
+                                <HBox fx:id="changeStatsBox">
+
+                                </HBox>
+                                <ToggleButton fx:id="changeButton2">
                                     <graphic>
                                         <ImageView>
                                             <image>
@@ -241,7 +251,7 @@
                                             </image>
                                         </ImageView>
                                     </graphic>
-                                </Button>
+                                </ToggleButton>
                             </HBox>
                         </top>
                             <center>

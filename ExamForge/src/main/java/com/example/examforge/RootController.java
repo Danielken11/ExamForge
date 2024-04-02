@@ -6,13 +6,16 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -20,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import java.io.IOException;
 import java.util.Timer;
@@ -49,15 +53,21 @@ public class RootController {
     @FXML
     NumberAxis n2;
     @FXML
-    Button changeButton, changeButton2;
+    ToggleButton changeButton, changeButton2;
     @FXML
     Label statusLabel;
+    @FXML
+    Button logOutButton;
+    @FXML
+        HBox exitPaneBox,changeStatsBox;
 
     private Stage stage;
     private double xOffset;
     private double yOffset;
     private Parent root;
     Server server;
+    public Thread connectionThread;
+    public boolean connectionState;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -66,8 +76,31 @@ public class RootController {
     public void setServer(Server server) {
         this.server = server;
     }
+    private void buttonInteraction(Button button){
+        button.setOnMouseEntered(event -> {
+            button.setCursor(Cursor.HAND);
+        });
+
+        button.setOnMouseExited(event -> {
+            button.setCursor(Cursor.DEFAULT);
+        });
+    }
+    private void onMousePressed(MouseEvent event) {
+        xOffset = event.getSceneX();
+        yOffset = event.getSceneY();
+    }
+
+    private void onMouseDragged(MouseEvent event) {
+        Stage stage = (Stage) ((Scene) event.getSource()).getWindow();
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
+    }
 
     public void initialize() {
+
+        buttonInteraction(logOutButton);
+        exitPaneBox.setVisible(false);
+        changeStatsBox.setVisible(false);
 
         Ellipse ellipse = new Ellipse();
 
@@ -119,54 +152,66 @@ public class RootController {
 
         dataBaseChart.getData().add(series);
 
-//    Thread connectionThread = new Thread(()->{
-//        while(true){
-//            try {
-//                Platform.runLater(()->{
-//                    if(server.socket.isConnected()){
-//                        statusLabel.setText("connected");
-//                        statusLabel.setStyle("    -fx-font-size: 9;" +
-//                                "    -fx-text-fill: #15ec18;" +
-//                                "    -fx-font-weight: bold;" +
-//                                "    -fx-font-family: Arial;");
-//                    }else{
-//                        statusLabel.setText("disconnected");
-//                        statusLabel.setStyle("    -fx-font-size: 9;" +
-//                                "    -fx-text-fill: #ff3a3a;" +
-//                                "    -fx-font-weight: bold;" +
-//                                "    -fx-font-family: Arial;");
-//                    }
-//                });
-//                Thread.sleep(100);
-//            }catch (Exception ex){
-//                ex.printStackTrace();
-//            }
-//        }
-//    });
-//    connectionThread.setDaemon(true);
-//    connectionThread.start();
-        Task<Boolean> connectionTask = new Task<>() {
-            @Override
-            protected Boolean call() {
-                return server.socket.isConnected();
-            }
-        };
+        Thread showStatus = new Thread(()->{
+           while(true){
+               try {
+                   Platform.runLater(()->{
 
-        connectionTask.setOnSucceeded(event -> {
-            boolean isConnected = connectionTask.getValue();
-            if (isConnected) {
-                statusLabel.setText("Connection successful!");
-            } else {
-                statusLabel.setText("Connection failed.");
-            }
+                      if(server.connected){
+                          statusLabel.setText("connected");
+                          statusLabel.setStyle("    -fx-font-size: 9;" +
+                                  "    -fx-text-fill: #15ec18;" +
+                                  "    -fx-font-weight: bold;" +
+                                  "    -fx-font-family: Arial;");
+
+                          System.out.println("connected");
+                      }else if(!server.connected) {
+                          statusLabel.setText("disconnected");
+                          statusLabel.setStyle("    -fx-font-size: 9;" +
+                                  "    -fx-text-fill: #ff3a3a;" +
+                                  "    -fx-font-weight: bold;" +
+                                  "    -fx-font-family: Arial;");
+                          System.out.println("disconnected");
+                      }
+                   });
+                   Thread.sleep(3000);
+               }catch (Exception ex){
+                   ex.printStackTrace();
+               }
+           }
         });
 
-        connectionTask.setOnFailed(event -> {
-            statusLabel.setText("Connection check failed.");
-        });
+        showStatus.start();
+}
 
-        Thread connectionThread = new Thread(connectionTask);
-        connectionThread.start();
+@FXML
+    private void exitPane(){
+    if(changeButton.isSelected()){
+        exitPaneBox.setVisible(true);
+    }else{
+        exitPaneBox.setVisible(false);
+    }
+}
+@FXML
+    private void signOut() throws IOException {
+    stage.close();
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("login-view.fxml"));
+    root = loader.load();
+    Scene scene = new Scene(root, 1000, 600);
+    Stage loginStage = new Stage();
+
+    scene.setOnMousePressed(this::onMousePressed);
+    scene.setOnMouseDragged(this::onMouseDragged);
+
+    loginStage.setScene(scene);
+    loginStage.initStyle(StageStyle.UNDECORATED);
+    loginStage.setTitle("ExamForge");
+    loginStage.show();
+    stage.close();
+
+    LoginController loginController = loader.getController();
+    loginController.setStage(loginStage);
+    loginController.setServer(server);
 }
 
 @FXML
@@ -191,6 +236,8 @@ public class RootController {
         root = loader.load();
         rootBorder.setCenter(root);
         System.out.println(server.socket.isConnected());
+        DataController dataController = loader.getController();
+        dataController.setServer(server);
 }
 @FXML
     private void generateScene() throws IOException {

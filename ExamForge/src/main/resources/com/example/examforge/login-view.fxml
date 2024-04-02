@@ -38,9 +38,9 @@
             </center>
             <bottom>
                 <VBox>
-                    <HBox>
+                    <HBox alignment="CENTER">
                         <padding>
-                            <Insets bottom="95" left="30"/>
+                            <Insets bottom="95" />
                         </padding>
                         <Label fx:id="msgLabel" />
                     </HBox>

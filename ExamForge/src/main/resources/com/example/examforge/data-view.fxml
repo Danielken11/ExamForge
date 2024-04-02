@@ -15,7 +15,7 @@
                 </padding>
                         <left>
                             <HBox alignment="CENTER">
-                                <Label text="Connected DB:" fx:id="l2"/>
+                                <Label text="Connected: " fx:id="l2"/>
                             </HBox>
                         </left>
                         <center>

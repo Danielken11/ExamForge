@@ -29,7 +29,7 @@
             <CheckBox fx:id="showPassword" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
             <ImageView fx:id="questionImage" GridPane.rowIndex="2" GridPane.columnIndex="2" onMouseEntered="#showReq">
                 <image>
-                    <Image url="@assets/login/requireIco.png"/>
+                    <Image url="@assets/login/reqImage.png"/>
                 </image>
             </ImageView>
             <BorderPane fx:id="infoPane" GridPane.rowIndex="2" GridPane.columnIndex="0">
@@ -61,9 +61,9 @@
     </center>
     <bottom>
         <VBox>
-            <HBox>
+            <HBox alignment="CENTER">
                 <padding>
-                    <Insets bottom="95" left="30"/>
+                    <Insets bottom="95"/>
                 </padding>
                 <Label fx:id="msgLabel" />
             </HBox>

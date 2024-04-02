@@ -1,4 +1,6 @@
 package com.example.examforge;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+
 import java.io.IOException;
 import java.util.regex.Pattern;
 
@@ -36,6 +40,8 @@ public class LoginController {
     GridPane gridPane;
 @FXML
     BorderPane loginPane;
+@FXML
+    Label msgLabel;
 
     TextField passwordShowLabel;
 
@@ -50,6 +56,13 @@ public void setStage(Stage stage) {
 public void setServer(Server server){
     this.server = server;
 }
+    private void scheduleLabelDisappearance(Label label) {
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> {
+            label.setText("");
+        }));
+        timeline.play();
+    }
 
 public void initialize(){
 
@@ -97,6 +110,8 @@ public void initialize(){
                 login();
             } catch (IOException e) {
                 throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
             }
         }
     });
@@ -123,33 +138,51 @@ public void initialize(){
     }
 
 @FXML
-    private void login() throws IOException {
+    private void login() throws IOException, ClassNotFoundException {
 
-    Stage rootStage = new Stage();
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("root-view.fxml"));
-    root = loader.load();
+//
+//    String query = "SELECT * FROM [Calculatoare].[dbo].[Users] WHERE Login = '" +  login.getText() + "' AND Password = '" + password.getText() + "'";
+//
+//    server.sendQuery(query);
+//    String receivedData = (String) server.in.readObject();
+//
+//    System.out.println(receivedData);
+//
+//    if(receivedData.isEmpty()){
+//        System.out.println("Empty data");
+//        msgLabel.setText("Invalid login credentials. Please check your username and password.");
+//        scheduleLabelDisappearance(msgLabel);
+//    }else{
+        Stage rootStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("root-view.fxml"));
+        root = loader.load();
 
 //Creating a clip with triangle for making stage with rounded corners ,because javafx don't have the implementation of custom windows decoration
-    root.setStyle("-fx-background-radius: 8;-fx-border-radius: 8");
-    Rectangle rect = new Rectangle(1150,700);
-    rect.setArcHeight(15.0);
-    rect.setArcWidth(15.0);
-    root.setClip(rect);
+        root.setStyle("-fx-background-radius: 8;-fx-border-radius: 8");
+        Rectangle rect = new Rectangle(1150,700);
+        rect.setArcHeight(15.0);
+        rect.setArcWidth(15.0);
+        root.setClip(rect);
 
-    Scene scene = new Scene(root,1150,700);
-    scene.setFill(Color.TRANSPARENT);
-    rootStage.setScene(scene);
-    rootStage.initStyle(StageStyle.TRANSPARENT);
-    rootStage.setOpacity(0.99);
-    rootStage.setTitle("ExamForge");
+        Scene scene = new Scene(root,1150,700);
+        scene.setFill(Color.TRANSPARENT);
+        rootStage.setScene(scene);
+        rootStage.initStyle(StageStyle.TRANSPARENT);
+        rootStage.setOpacity(0.99);
+        rootStage.setTitle("ExamForge");
 
-    rootStage.show();
-    stage.close();
+        rootStage.show();
+        stage.close();
 
-    RootController rootController = loader.getController();
+        RootController rootController = loader.getController();
 
-    rootController.setStage(rootStage);
-    rootController.setServer(server);
+        rootController.setStage(rootStage);
+        rootController.setServer(server);
+//    }
+
+
+
+
 }
 @FXML
     private void signUPScene() throws IOException {

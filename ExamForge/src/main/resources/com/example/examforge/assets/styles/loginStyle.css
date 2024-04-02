@@ -45,8 +45,8 @@
     -fx-pref-width: 20;
 }
 #msgLabel{
-    -fx-text-fill: white;
-    -fx-font-size: 14;
+    -fx-text-fill: #d55757;
+    -fx-font-size: 12;
     -fx-font-family: Arial;
     -fx-font-weight: bold;
 }
