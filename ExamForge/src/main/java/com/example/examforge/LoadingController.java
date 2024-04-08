@@ -95,44 +95,44 @@ public void initialize() throws IOException, InterruptedException {
 
   connectionThread.start();
 
-  Thread checkConnection = new Thread(()->{
-      while (true){
-        try {
-            Platform.runLater(()->{
-                try {
-                    server.sendQuery("GetStatus");
-
-                    String reception = (String) server.in.readObject();
-                    System.out.println(reception);
-                    isRunning = true;
-
-                    if(reception.isEmpty()){
-                        isRunning = false;
-                        while (true){
-
-                            server.connect();
-
-                            if(server.connected){
-                                isRunning = true;
-                                System.out.println("Connected");
-                                break;
-                            }
-                        }
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } catch (ClassNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-        Thread.sleep(3000);
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-      }
-  });
-
-    checkConnection.start();
+//  Thread checkConnection = new Thread(()->{
+//      while (true){
+//        try {
+//            Platform.runLater(()->{
+//                try {
+//                    server.sendQuery("GetStatus");
+//
+//                    String reception = (String) server.in.readObject();
+//                    System.out.println(reception);
+//                    isRunning = true;
+//
+//                    if(reception.isEmpty()){
+//                        isRunning = false;
+//                        while (true){
+//
+//                            server.connect();
+//
+//                            if(server.connected){
+//                                isRunning = true;
+//                                System.out.println("Connected");
+//                                break;
+//                            }
+//                        }
+//                    }
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                } catch (ClassNotFoundException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            });
+//        Thread.sleep(3000);
+//        }catch (Exception ex){
+//            ex.printStackTrace();
+//        }
+//      }
+//  });
+//
+//    checkConnection.start();
 
 }
 

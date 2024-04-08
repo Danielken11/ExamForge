@@ -60,6 +60,8 @@ public class RootController {
     Button logOutButton;
     @FXML
         HBox exitPaneBox,changeStatsBox;
+    @FXML
+        Label d1,d2,d3;
 
     private Stage stage;
     private double xOffset;
@@ -68,6 +70,7 @@ public class RootController {
     Server server;
     public Thread connectionThread;
     public boolean connectionState;
+    private User user;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -95,8 +98,19 @@ public class RootController {
         stage.setX(event.getScreenX() - xOffset);
         stage.setY(event.getScreenY() - yOffset);
     }
-
+    public void setUserData(User user){
+        this.user = user;
+    }
+//    private void setData(){
+//        Platform.runLater(()->{
+//            d1.setText(user.email);
+//            d2.setText(user.login);
+//            d3.setText(user.status);
+//        });
+//
+//    }
     public void initialize() {
+//        setData();
 
         buttonInteraction(logOutButton);
         exitPaneBox.setVisible(false);
@@ -151,37 +165,37 @@ public class RootController {
         n2.setTickMarkVisible(false);
 
         dataBaseChart.getData().add(series);
-
-        Thread showStatus = new Thread(()->{
-           while(true){
-               try {
-                   Platform.runLater(()->{
-
-                      if(server.connected){
-                          statusLabel.setText("connected");
-                          statusLabel.setStyle("    -fx-font-size: 9;" +
-                                  "    -fx-text-fill: #15ec18;" +
-                                  "    -fx-font-weight: bold;" +
-                                  "    -fx-font-family: Arial;");
-
-                          System.out.println("connected");
-                      }else if(!server.connected) {
-                          statusLabel.setText("disconnected");
-                          statusLabel.setStyle("    -fx-font-size: 9;" +
-                                  "    -fx-text-fill: #ff3a3a;" +
-                                  "    -fx-font-weight: bold;" +
-                                  "    -fx-font-family: Arial;");
-                          System.out.println("disconnected");
-                      }
-                   });
-                   Thread.sleep(3000);
-               }catch (Exception ex){
-                   ex.printStackTrace();
-               }
-           }
-        });
-
-        showStatus.start();
+//
+//        Thread showStatus = new Thread(()->{
+//           while(true){
+//               try {
+//                   Platform.runLater(()->{
+//
+//                      if(server.connected){
+//                          statusLabel.setText("connected");
+//                          statusLabel.setStyle("    -fx-font-size: 9;" +
+//                                  "    -fx-text-fill: #15ec18;" +
+//                                  "    -fx-font-weight: bold;" +
+//                                  "    -fx-font-family: Arial;");
+//
+//                          System.out.println("connected");
+//                      }else if(!server.connected) {
+//                          statusLabel.setText("disconnected");
+//                          statusLabel.setStyle("    -fx-font-size: 9;" +
+//                                  "    -fx-text-fill: #ff3a3a;" +
+//                                  "    -fx-font-weight: bold;" +
+//                                  "    -fx-font-family: Arial;");
+//                          System.out.println("disconnected");
+//                      }
+//                   });
+//                   Thread.sleep(3000);
+//               }catch (Exception ex){
+//                   ex.printStackTrace();
+//               }
+//           }
+//        });
+//
+//        showStatus.start();
 }
 
 @FXML
@@ -235,7 +249,6 @@ public class RootController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("data-view.fxml"));
         root = loader.load();
         rootBorder.setCenter(root);
-        System.out.println(server.socket.isConnected());
         DataController dataController = loader.getController();
         dataController.setServer(server);
 }

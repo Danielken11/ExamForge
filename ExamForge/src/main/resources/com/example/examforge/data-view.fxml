@@ -20,7 +20,7 @@
                         </left>
                         <center>
                             <HBox alignment="CENTER">
-                                <ComboBox fx:id="comboTable" promptText="Select Table"/>
+                                <ComboBox fx:id="comboTable" promptText="Select Table" />
                             </HBox>
                         </center>
             </BorderPane>

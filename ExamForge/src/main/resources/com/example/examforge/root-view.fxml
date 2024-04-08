@@ -206,7 +206,7 @@
                                                     <Image url="@assets/root/icons8-email-24.png"/>
                                                 </image>
                                             </ImageView>
-                                            <Label fx:id="d1" text="sebastianSebas@gmail.com"/>
+                                            <Label fx:id="d1"/>
                                         </HBox>
                                         <HBox GridPane.rowIndex="1" spacing="12" fx:id="h2" alignment="CENTER_LEFT">
                                             <padding>
@@ -217,14 +217,14 @@
                                                     <Image url="@assets/root/loginIco.png"/>
                                                 </image>
                                             </ImageView>
-                                            <Label fx:id="d2" text="Feanor11" />
+                                            <Label fx:id="d2"/>
                                         </HBox>
                                         <HBox GridPane.rowIndex="2" spacing="12" fx:id="h3" alignment="CENTER_LEFT">
                                             <padding>
                                                 <Insets left="10"/>
                                             </padding>
                                             <Label fx:id="statusDetail" text="status" />
-                                            <Label fx:id="d3" text="Admin" />
+                                            <Label fx:id="d3" />
                                         </HBox>
                                     </GridPane>
                                 </HBox>

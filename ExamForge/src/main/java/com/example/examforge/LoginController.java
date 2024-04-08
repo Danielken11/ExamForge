@@ -16,7 +16,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.util.regex.Pattern;
 
@@ -140,7 +139,6 @@ public void initialize(){
 @FXML
     private void login() throws IOException, ClassNotFoundException {
 
-//
 //    String query = "SELECT * FROM [Calculatoare].[dbo].[Users] WHERE Login = '" +  login.getText() + "' AND Password = '" + password.getText() + "'";
 //
 //    server.sendQuery(query);
@@ -176,20 +174,24 @@ public void initialize(){
 
         RootController rootController = loader.getController();
 
+//        String[] arrayString = receivedData.split(",");
+//
+//        User currentUser = new User(arrayString[0],arrayString[1],arrayString[2],"Student");
+//
+//        rootController.setUserData(currentUser);
         rootController.setStage(rootStage);
         rootController.setServer(server);
 //    }
-
-
-
-
 }
+
 @FXML
     private void signUPScene() throws IOException {
+
+    login.clear();
+    password.clear();
        FXMLLoader loader = new FXMLLoader(getClass().getResource("sign-view.fxml"));
        root = loader.load();
        mainView.setLeft(root);
-
 
        SignUpController signUpController = loader.getController();
        signUpController.setPanes(mainView,loginPane);
