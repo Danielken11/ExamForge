@@ -18,6 +18,7 @@ public class SettingsController {
 
         combo1.setItems(list1);
         combo2.setItems(list2);
+
         combo1.getSelectionModel().selectFirst();
         combo2.getSelectionModel().selectFirst();
     }

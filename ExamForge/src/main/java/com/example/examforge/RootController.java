@@ -111,7 +111,7 @@ public class RootController {
 //    }
     public void initialize() {
 //        setData();
-
+        
         buttonInteraction(logOutButton);
         exitPaneBox.setVisible(false);
         changeStatsBox.setVisible(false);
@@ -232,6 +232,7 @@ public class RootController {
     private void dashScene(){
     rootBorder.setCenter(mainView);
 
+
 }
     private void slideTransition(Parent root) {
 
@@ -257,6 +258,8 @@ public class RootController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("generator-view.fxml"));
         root = loader.load();
         rootBorder.setCenter(root);
+        GeneratorController generatorController  = loader.getController();
+        generatorController.setServer(server);
 }
 @FXML
     private void settingsScene() throws IOException {

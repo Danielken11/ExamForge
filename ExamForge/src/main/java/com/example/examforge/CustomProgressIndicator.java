@@ -32,7 +32,7 @@ public class CustomProgressIndicator extends StackPane {
         arc.setRadiusY(25);
         arc.setStartAngle(-90);
         arc.setLength(360);
-        arc.setType(ArcType.OPEN);
+        arc.setType(ArcType.OPEN);  
         arc.setStrokeWidth(5);
         arc.setFill(null);
         return arc;

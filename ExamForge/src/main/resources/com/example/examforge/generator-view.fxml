@@ -5,23 +5,99 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-
+<?import com.example.examforge.CustomSpinner?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.examforge.GeneratorController" stylesheets="@assets/styles/generatorStyle.css">
   <center>
       <HBox alignment="CENTER">
           <VBox alignment="CENTER" spacing="20">
-              <HBox>
                   <BorderPane fx:id="generatorControlContainer1">
-
+                      <padding>
+                          <Insets top="15"/>
+                      </padding>
+                      <top>
+                          <HBox  fx:id="top1" alignment="CENTER_LEFT">
+                              <padding>
+                                  <Insets left="15"/>
+                              </padding>
+                              <Label text="Connected: " fx:id="l1"/>
+                          </HBox>
+                      </top>
+                      <center>
+                          <HBox alignment="CENTER">
+                              <padding>
+                                  <Insets top="30"/>
+                              </padding>
+                              <VBox spacing="25">
+                                  <HBox fx:id="h1" alignment="CENTER_LEFT">
+                                      <padding>
+                                          <Insets left="10"/>
+                                      </padding>
+                                      <ImageView>
+                                          <image>
+                                              <Image url="@assets/generator/data.png" />
+                                          </image>
+                                      </ImageView>
+                                      <VBox>
+                                          <padding>
+                                              <Insets left="20" top="7"/>
+                                          </padding>
+                                          <Label text="Table selection" fx:id="info1"/>
+                                          <Label text="selected table represents the data used for generation" fx:id="info1Detailed"/>
+                                      </VBox>
+                                      <Region fx:id="r1"/>
+                                      <Pane fx:id="pane1">
+                                          <ComboBox promptText="Select table" fx:id="comboTable"/>
+                                      </Pane>
+                                  </HBox>
+                                  <HBox fx:id="h2" alignment="CENTER_LEFT">
+                                      <padding>
+                                          <Insets left="10"/>
+                                      </padding>
+                                      <ImageView>
+                                          <image>
+                                              <Image url="@assets/generator/tickets.png"/>
+                                          </image>
+                                      </ImageView>
+                                      <VBox>
+                                          <padding>
+                                              <Insets left="20" top="7"/>
+                                          </padding>
+                                          <Label text="Quantity selection" fx:id="info2"/>
+                                          <Label text="selected quantity of tickets" fx:id="info2Detailed"/>
+                                      </VBox>
+                                      <Region fx:id="r2"/>
+                                      <CustomSpinner fx:id="quantitySpinner"/>
+                                  </HBox>
+                                  <HBox fx:id="h3" alignment="CENTER_LEFT">
+                                      <padding>
+                                          <Insets left="10"/>
+                                      </padding>
+                                      <ImageView>
+                                          <image>
+                                              <Image url="@assets/generator/quantity.png"/>
+                                          </image>
+                                      </ImageView>
+                                      <VBox>
+                                          <padding>
+                                              <Insets left="20" top="7"/>
+                                          </padding>
+                                          <Label text="Question number selection" fx:id="info3"/>
+                                          <Label text="selected number of questions per ticket" fx:id="info3Detailed"/>
+                                      </VBox>
+                                      <Region fx:id="r3"/>
+                                      <CustomSpinner fx:id="numberSpinner"/>
+                                  </HBox>
+                              </VBox>
+                          </HBox>
+                      </center>
                   </BorderPane>
-              </HBox>
-              <HBox>
                   <BorderPane fx:id="generatorControlContainer2">
 
                   </BorderPane>
-              </HBox>
           </VBox>
       </HBox>
   </center>
