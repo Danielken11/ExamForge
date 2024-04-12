@@ -17,7 +17,6 @@ public Label textField;
 private HBox spinner;
 public AtomicInteger var;
 
-
     private void buttonInteraction(Button button){
         button.setOnMouseEntered(event -> {
             button.setCursor(Cursor.HAND);
@@ -56,7 +55,6 @@ public AtomicInteger var;
         int value = Integer.parseInt(textField.getText());
         return value;
    }
-
    public HBox createSpinner(){
        Circle circle = new Circle();
 

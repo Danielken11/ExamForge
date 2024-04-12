@@ -3,6 +3,8 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -14,9 +16,21 @@ public class GeneratorController {
 @FXML
     Label l1;
 @FXML
-    ComboBox comboTable;
+    ComboBox<String> comboTable;
+@FXML
+    Button pathButton;
 
 public Server server;
+
+private void buttonInteraction(Button button){
+    button.setOnMouseEntered(event -> {
+        button.setCursor(Cursor.HAND);
+    });
+
+    button.setOnMouseExited(event -> {
+        button.setCursor(Cursor.DEFAULT);
+    });
+}
 
 public void setServer(Server server) {
     this.server = server;
@@ -24,6 +38,7 @@ public void setServer(Server server) {
 
 public void initialize(){
     getDBName();setDBTables();
+    buttonInteraction(pathButton);
 }
 
 public void getDBName(){

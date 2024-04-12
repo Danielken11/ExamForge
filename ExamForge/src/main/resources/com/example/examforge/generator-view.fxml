@@ -96,10 +96,39 @@
                       </center>
                   </BorderPane>
                   <BorderPane fx:id="generatorControlContainer2">
-
+                      <padding>
+                          <Insets top="15"/>
+                      </padding>
+                      <top>
+                          <HBox spacing="100" alignment="CENTER">
+                              <HBox fx:id="pathInfoBox" alignment="CENTER_LEFT">
+                                  <padding>
+                                      <Insets left="5"/>
+                                  </padding>
+                                  <HBox spacing="5" alignment="CENTER_LEFT">
+                                      <ImageView>
+                                          <image>
+                                              <Image url="@assets/generator/fileIco.png"/>
+                                          </image>
+                                      </ImageView>
+                                      <Label text="Select Path" fx:id="pathInfoLabel"/>
+                                  </HBox>
+                                  <Region fx:id="pathRegion"/>
+                                  <TextField fx:id="pathUrl" editable="false" />
+                              </HBox>
+                                  <Button fx:id="pathButton">
+                                      <graphic>
+                                          <ImageView>
+                                              <image>
+                                                  <Image url="@assets/generator/pathIco24.png"/>
+                                              </image>
+                                          </ImageView>
+                                      </graphic>
+                                  </Button>
+                          </HBox>
+                      </top>
                   </BorderPane>
           </VBox>
       </HBox>
   </center>
-
 </BorderPane>
