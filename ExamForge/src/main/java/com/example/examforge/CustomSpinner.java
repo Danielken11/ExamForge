@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
-
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CustomSpinner extends HBox {
@@ -35,7 +34,7 @@ public AtomicInteger var;
    public void initialize(){
        getChildren().addAll(spinner);
 
-       this.textField.setText(String.valueOf(0));
+//       this.textField.setText(String.valueOf(0));
 
        var = new AtomicInteger();
        this.incrementButton.setOnAction(event -> {
@@ -45,9 +44,10 @@ public AtomicInteger var;
 
        this.decrementButton.setOnAction(event -> {
            int value = var.get();
-           if (value > 0) {
+           if (value > 1) {
                var.getAndDecrement();
                this.textField.setText(String.valueOf(var));
+
            }
        });
    }

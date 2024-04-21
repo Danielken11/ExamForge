@@ -13,11 +13,11 @@
 }
 #h1{
     -fx-background-color: #494954;
-    -fx-pref-width: 240;
-    -fx-pref-height: 40;
-    -fx-max-width: 240;
-    -fx-max-height: 40;
-    -fx-effect: null;
+    -fx-pref-width: 850;
+    -fx-pref-height: 50;
+    -fx-max-width: 850;
+    -fx-max-height: 50;
+    -fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.5), 30, 0, 0, 0);
 }
 #l1{
     -fx-font-size: 10;

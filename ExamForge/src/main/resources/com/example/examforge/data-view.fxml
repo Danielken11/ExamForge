@@ -10,17 +10,17 @@
     <top>
         <HBox alignment="CENTER">
             <BorderPane fx:id="dataControlContainer">
-                <padding>
-                    <Insets left="15"/>
-                </padding>
-                        <left>
-                            <HBox alignment="CENTER">
-                                <Label text="Connected: " fx:id="l2"/>
-                            </HBox>
-                        </left>
                         <center>
-                            <HBox alignment="CENTER">
-                                <ComboBox fx:id="comboTable" promptText="Select Table" />
+                            <HBox alignment="CENTER_LEFT" spacing="400" fx:id="h1">
+                                <padding>
+                                    <Insets left="15"/>
+                                </padding>
+                                <HBox alignment="CENTER">
+                                    <Label text="Connected: " fx:id="l2"/>
+                                </HBox>
+                                <HBox alignment="CENTER">
+                                    <ComboBox fx:id="comboTable" promptText="Select Table" />
+                                </HBox>
                             </HBox>
                         </center>
             </BorderPane>

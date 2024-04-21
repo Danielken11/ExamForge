@@ -97,38 +97,104 @@
                   </BorderPane>
                   <BorderPane fx:id="generatorControlContainer2">
                       <padding>
-                          <Insets top="15"/>
+                          <Insets left="20" top="50"/>
                       </padding>
-                      <top>
-                          <HBox spacing="100" alignment="CENTER">
-                              <HBox fx:id="pathInfoBox" alignment="CENTER_LEFT">
-                                  <padding>
-                                      <Insets left="5"/>
-                                  </padding>
-                                  <HBox spacing="5" alignment="CENTER_LEFT">
-                                      <ImageView>
-                                          <image>
-                                              <Image url="@assets/generator/fileIco.png"/>
-                                          </image>
-                                      </ImageView>
-                                      <Label text="Select Path" fx:id="pathInfoLabel"/>
-                                  </HBox>
-                                  <Region fx:id="pathRegion"/>
-                                  <TextField fx:id="pathUrl" editable="false" />
-                              </HBox>
-                                  <Button fx:id="pathButton">
-                                      <graphic>
-                                          <ImageView>
-                                              <image>
-                                                  <Image url="@assets/generator/pathIco24.png"/>
-                                              </image>
-                                          </ImageView>
-                                      </graphic>
-                                  </Button>
-                          </HBox>
-                      </top>
-                  </BorderPane>
+                      <center>
+                              <VBox spacing="25">
+                                  <GridPane hgap="40">
+                                      <HBox spacing="40" alignment="CENTER_LEFT" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                                          <children>
+                                              <HBox fx:id="pathInfoBox" alignment="CENTER_LEFT">
+                                                  <padding>
+                                                      <Insets left="15"/>
+                                                  </padding>
+                                                  <HBox spacing="5" alignment="CENTER_LEFT">
+                                                      <ImageView>
+                                                          <image>
+                                                              <Image url="@assets/generator/fileIco.png"/>
+                                                          </image>
+                                                      </ImageView>
+                                                      <Label text="Select Path" fx:id="pathInfoLabel"/>
+                                                  </HBox>
+                                                  <Region fx:id="pathRegion"/>
+                                                  <TextField fx:id="pathUrl" editable="false" />
+                                              </HBox>
+                                          </children>
+                                      </HBox>
+                                      <Button fx:id="pathButton" GridPane.rowIndex="0" GridPane.columnIndex="1" onAction="#getPath">
+                                          <graphic>
+                                              <ImageView>
+                                                  <image>
+                                                      <Image url="@assets/generator/pathIco24.png"/>
+                                                  </image>
+                                              </ImageView>
+                                          </graphic>
+                                      </Button>
+                                  </GridPane>
+                                  <GridPane hgap="40">
+                                      <HBox fx:id="h4" alignment="CENTER_LEFT" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                                          <children>
+                                              <HBox alignment="CENTER_LEFT">
+                                                  <padding>
+                                                      <Insets left="10"/>
+                                                  </padding>
+                                                  <ImageView>
+                                                      <image>
+                                                          <Image url="@assets/generator/separatorIco.png"/>
+                                                      </image>
+                                                  </ImageView>
+                                                  <VBox>
+                                                      <padding>
+                                                          <Insets left="20" top="7"/>
+                                                      </padding>
+                                                      <Label text="Separation line" fx:id="info4"/>
+                                                      <Label text="add a line separating the tickets" fx:id="info4Detailed"/>
+                                                  </VBox>
+                                              </HBox>
+                                          </children>
+                                      </HBox>
+                                      <HBox GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="CENTER" fx:id="checkBox">
+                                          <children>
+                                              <CheckBox fx:id="checkLine"/>
+                                          </children>
+                                      </HBox>
+                                  </GridPane>
+                                  <GridPane hgap="40">
+                                      <HBox fx:id="h5" alignment="CENTER_LEFT" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                                          <children>
+                                              <HBox alignment="CENTER_LEFT">
+                                                  <padding>
+                                                      <Insets left="10"/>
+                                                  </padding>
+                                                  <ImageView>
+                                                      <image>
+                                                          <Image url="@assets/generator/forgeIco.png"/>
+                                                      </image>
+                                                  </ImageView>
+                                                  <VBox>
+                                                      <padding>
+                                                          <Insets left="20" top="7"/>
+                                                      </padding>
+                                                      <Label text="Generator" fx:id="info5"/>
+                                                      <Label text="generate examination tickets" fx:id="info5Detailed"/>
+                                                  </VBox>
+                                              </HBox>
+                                          </children>
+                                      </HBox>
+                                      <Button GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="forgeButton" onAction="#generate">
+                                        <graphic>
+                                            <ImageView>
+                                                <image>
+                                                    <Image url="@assets/generator/hammerIcoButton.png"/>
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
+                                      </Button>
+                                  </GridPane>
+                              </VBox>
+                      </center>
+                </BorderPane>
           </VBox>
       </HBox>
-  </center>
+    </center>
 </BorderPane>
