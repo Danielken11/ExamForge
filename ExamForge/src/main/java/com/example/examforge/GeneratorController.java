@@ -87,9 +87,6 @@ private void writeToFile(ArrayList<String> list, String fileUrl) throws IOExcept
         int quantity = quantitySpinner.getValue();
         int numbers = numberSpinner.getValue();
 
-        Tickets[] tickets = new Tickets[quantity + 1];
-        String[] questions = new String[numbers+1];
-
         for(int i = 0; i<quantity;i++){
 
             Collections.shuffle(list);
