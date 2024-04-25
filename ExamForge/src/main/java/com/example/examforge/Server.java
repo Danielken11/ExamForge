@@ -28,7 +28,7 @@ public void receiveQuery() throws IOException, ClassNotFoundException {
 }
     public void connect() {
         try {
-            this.socket = new Socket("localhost", 19997);
+            this.socket = new Socket("localhost", 8080);
             this.out = new ObjectOutputStream(socket.getOutputStream());
             this.in = new ObjectInputStream(socket.getInputStream());
             connected = true;

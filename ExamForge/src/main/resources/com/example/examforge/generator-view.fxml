@@ -10,7 +10,7 @@
 <?import javafx.scene.image.Image?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.examforge.GeneratorController" stylesheets="@assets/styles/generatorStyle.css">
+            fx:controller="com.example.examforge.GeneratorController" stylesheets="@assets/styles/generatorStyle.css" fx:id="generatorBorder">
   <center>
       <HBox alignment="CENTER">
           <VBox alignment="CENTER" spacing="20">

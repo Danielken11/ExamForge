@@ -1,0 +1,14 @@
+#doneBorderPane{
+    -fx-background-color: linear-gradient(to bottom, #443D40, #494954);
+    -fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.5), 30, 0, 0, 0);
+    -fx-background-radius: 12;
+    -fx-pref-width: 800;
+    -fx-max-width: 800;
+    -fx-pref-height: 600;
+    -fx-max-height: 600;
+}
+#l1{
+    -fx-font-size: 15;
+    -fx-text-fill: White;
+    -fx-font-weight: bold;
+}

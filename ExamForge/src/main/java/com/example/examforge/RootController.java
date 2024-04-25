@@ -79,6 +79,7 @@ public class RootController {
     public void setServer(Server server) {
         this.server = server;
     }
+
     private void buttonInteraction(Button button){
         button.setOnMouseEntered(event -> {
             button.setCursor(Cursor.HAND);
@@ -101,16 +102,16 @@ public class RootController {
     public void setUserData(User user){
         this.user = user;
     }
-//    private void setData(){
-//        Platform.runLater(()->{
-//            d1.setText(user.email);
-//            d2.setText(user.login);
-//            d3.setText(user.status);
-//        });
-//
-//    }
+    private void setData(){
+        Platform.runLater(()->{
+            d1.setText(user.email);
+            d2.setText(user.login);
+            d3.setText(user.status);
+        });
+
+    }
     public void initialize() {
-//        setData();
+        setData();
         
         buttonInteraction(logOutButton);
         exitPaneBox.setVisible(false);
@@ -260,6 +261,7 @@ public class RootController {
         rootBorder.setCenter(root);
         GeneratorController generatorController  = loader.getController();
         generatorController.setServer(server);
+        generatorController.setPane(rootBorder);
 }
 @FXML
     private void settingsScene() throws IOException {

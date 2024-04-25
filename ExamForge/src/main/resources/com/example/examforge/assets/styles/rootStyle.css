@@ -43,9 +43,6 @@
     -fx-background-radius: 12;
     -fx-graphic-text-gap: 30;
 }
-/*#dashButton:pressed,#dataButton:pressed,#generateButton:pressed,#settingsButton:pressed{*/
-/*    -fx-background-color: #494954;*/
-/*}*/
 #dashButton:hover,#dataButton:hover,#generateButton:hover,#settingsButton:hover{
     -fx-background-color:#494954 ;
 }
@@ -72,13 +69,6 @@
     -fx-background-color:  linear-gradient(to bottom, #524b4e, #686870);
     -fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.5), 30, 0, 0, 0);
     -fx-background-radius: 12;
-    /*-fx-background-color: linear-gradient(to bottom right, rgba(17, 16, 16, 0.25), rgba(9, 9, 9, 0.4));*/
-    /*-fx-background-radius: 12;*/
-    /*-fx-border-color: rgba(255, 255, 255, 0.18);*/
-    /*-fx-border-width: 1px;*/
-    /*-fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.5), 30, 0, 0, 0);*/
-    /*-fx-border-radius: 12;*/
-
 }
 #appPane{
     -fx-pref-width: 800;
@@ -88,12 +78,6 @@
     -fx-background-color:  linear-gradient(to top, #524b4e, #686870);
     -fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.5), 30, 0, 0, 0);
     -fx-background-radius: 12;
-    /*-fx-background-color: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));*/
-    /*-fx-background-radius: 12;*/
-    /*-fx-border-color: rgba(255, 255, 255, 0.18);*/
-    /*-fx-border-width: 1px;*/
-    /*-fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.5), 30, 0, 0, 0);*/
-    /*-fx-border-radius: 12;*/
 }
 #label1{
     -fx-font-size: 11;

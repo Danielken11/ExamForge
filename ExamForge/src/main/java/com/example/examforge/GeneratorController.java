@@ -1,21 +1,29 @@
 package com.example.examforge;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+import javafx.util.Duration;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import static java.lang.Math.random;
 
 public class GeneratorController {
 
@@ -29,11 +37,17 @@ public class GeneratorController {
     CustomSpinner quantitySpinner,numberSpinner;
 @FXML
     TextField pathUrl;
+@FXML
+    CheckBox checkLine;
+@FXML
+    BorderPane generatorBorder;
 
 public Server server;
-private StringBuilder tableData;
+private StringBuilder tableData, testBuilder;
 private  ObservableList<String> questionList;
 private String pathURLData;
+private BorderPane mainView;
+Parent root;
 
 private void buttonInteraction(Button button){
     button.setOnMouseEntered(event -> {
@@ -43,6 +57,58 @@ private void buttonInteraction(Button button){
     button.setOnMouseExited(event -> {
         button.setCursor(Cursor.DEFAULT);
     });
+}
+public void setPane(BorderPane borderPane){
+    this.mainView = borderPane;
+}
+
+    private void sheduleInfoKill(Parent pane) {
+
+        javafx.animation.TranslateTransition transition = new javafx.animation.TranslateTransition(Duration.seconds(0.5), pane);
+
+        pane.setTranslateX(generatorBorder.getWidth());
+
+        transition.setToX(0);
+
+        transition.play();
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
+            pane.setVisible(false);
+            pane.setManaged(false);
+            mainView.setCenter(generatorBorder);
+        }));
+        timeline.play();
+    }
+
+private void writeToFile(ArrayList<String> list, String fileUrl) throws IOException {
+
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileUrl, false))) {
+
+        int quantity = quantitySpinner.getValue();
+        int numbers = numberSpinner.getValue();
+
+        Tickets[] tickets = new Tickets[quantity + 1];
+        String[] questions = new String[numbers+1];
+
+        for(int i = 0; i<quantity;i++){
+
+            Collections.shuffle(list);
+
+            List<String> ticketQuestions = list.subList(0, numbers);
+
+            for (String question : ticketQuestions) {
+                writer.write(question);
+                writer.newLine();
+            }
+            if (checkLine.isSelected()) {
+                writer.newLine();
+                writer.write("---------------------------------------------------------------------------------------------------------------------\n");
+                writer.newLine();
+            }
+        }
+    } catch (IOException ex) {
+        throw new IOException("Error writing to file: " + ex.getMessage());
+    }
 }
 
 public void setServer(Server server) {
@@ -78,6 +144,7 @@ public void getDBName(){
         }
     });
     }
+
     public void setDBTables(){
         Platform.runLater(()->{
             String getTablesQuery = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'";
@@ -101,7 +168,7 @@ public void getDBName(){
     }
 
     @FXML
-    private void generate(){
+    private void generate() throws IOException {
 
         if(!comboTable.getItems().isEmpty()) {
             String selectedTableName = comboTable.getSelectionModel().getSelectedItem();
@@ -116,7 +183,6 @@ public void getDBName(){
 
                 String fullString = tableData.toString();
                 String[] stringArray = fullString.split(",");
-
                 questionList.addAll(stringArray);
 
             } catch (IOException | ClassNotFoundException e) {
@@ -125,7 +191,14 @@ public void getDBName(){
 
             if (!questionList.isEmpty()) {
                 ArrayList<String> arrayList = new ArrayList<>(questionList);
+                Collections.shuffle(arrayList);
+                writeToFile(arrayList,pathURLData);
+                System.out.println("done");
 
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("done-view.fxml"));
+                root = loader.load();
+                mainView.setCenter(root);
+                sheduleInfoKill(root);
 
             }
         }
@@ -138,10 +211,12 @@ public void getDBName(){
         file.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Json File","*json"));
         file.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Word File","*docx"));
         file.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Old word File","*doc"));
+        file.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Pdf File","*pdf"));
 
         Stage openStage = new Stage();
         File openFile = file.showOpenDialog(openStage);
         pathUrl.setText(String.valueOf(openFile));
+        pathURLData = String.valueOf(openFile);
 
         if(openFile == null) {
             pathUrl.setText("");
