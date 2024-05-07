@@ -167,11 +167,18 @@ public void initialize(){
 }
 
 @FXML
-private void signUP(ActionEvent event) throws IOException {
+private void signUP(ActionEvent event) throws IOException, ClassNotFoundException {
 
     if(passwdMatches == true){
         server.sendQuery("INSERT INTO Users (Email,Login,Password) VALUES('" + emailNew.getText() + "','" + loginNew.getText() + "','" + passwordNew.getText() + "');");
-        mainPane.setLeft(secondPane);
+
+        StringBuilder data = new StringBuilder();
+        data.append(server.in.readObject());
+
+        if(!data.isEmpty()){
+         mainPane.setLeft(secondPane);
+        }
+
     }else{
         msgLabel.setText("Inccorect inserted data");
         scheduleLabelDisappearance(msgLabel);

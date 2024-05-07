@@ -9,6 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class DataController {
 
@@ -69,7 +70,10 @@ public void getDBName(){
             String query = "SELECT DB_NAME();";
             server.sendQuery(query);
             String dbName = (String) server.in.readObject();
-            l2.setText(l2.getText() +  dbName);
+            String[] result =  dbName.split(",");
+            String s1 = result[0];
+            String finalName = s1.toString();
+            l2.setText(l2.getText() + finalName);
         }catch (Exception ex){
             ex.printStackTrace();
         }

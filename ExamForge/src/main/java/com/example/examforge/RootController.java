@@ -99,19 +99,19 @@ public class RootController {
         stage.setX(event.getScreenX() - xOffset);
         stage.setY(event.getScreenY() - yOffset);
     }
-//    public void setUserData(User user){
-//        this.user = user;
-//    }
-//    private void setData(){
-//        Platform.runLater(()->{
-//            d1.setText(user.email);
-//            d2.setText(user.login);
-//            d3.setText(user.status);
-//        });
-//
-//    }
+    public void setUserData(User user){
+        this.user = user;
+    }
+    private void setData(){
+        Platform.runLater(()->{
+            d1.setText(user.email);
+            d2.setText(user.login);
+            d3.setText(user.status);
+        });
+
+    }
     public void initialize() {
-//        setData();
+        setData();
         
         buttonInteraction(logOutButton);
         exitPaneBox.setVisible(false);

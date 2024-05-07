@@ -95,6 +95,10 @@ private void writeToFile(ArrayList<String> list, String fileUrl) throws IOExcept
                 writer.newLine();
                 writer.write("---------------------------------------------------------------------------------------------------------------------\n");
                 writer.newLine();
+            }else{
+                writer.newLine();
+                writer.write("");
+                writer.newLine();
             }
         }
     } catch (IOException ex) {
@@ -129,7 +133,10 @@ public void getDBName(){
             String query = "SELECT DB_NAME();";
             server.sendQuery(query);
             String dbName = (String) server.in.readObject();
-            l1.setText(l1.getText() +  dbName);
+            String[] result =  dbName.split(",");
+            String s1 = result[0];
+            String finalName = s1.toString();
+            l1.setText(l1.getText() +  finalName);
         }catch (Exception ex){
             ex.printStackTrace();
         }
