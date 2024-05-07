@@ -43,7 +43,7 @@ public class GeneratorController {
     BorderPane generatorBorder;
 
 public Server server;
-private StringBuilder tableData, testBuilder;
+private StringBuilder tableData;
 private  ObservableList<String> questionList;
 private String pathURLData;
 private BorderPane mainView;
@@ -72,12 +72,6 @@ public void setPane(BorderPane borderPane){
 
         transition.play();
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
-            pane.setVisible(false);
-            pane.setManaged(false);
-            mainView.setCenter(generatorBorder);
-        }));
-        timeline.play();
     }
 
 private void writeToFile(ArrayList<String> list, String fileUrl) throws IOException {
@@ -194,6 +188,9 @@ public void getDBName(){
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("done-view.fxml"));
                 root = loader.load();
+                DoneController doneController = loader.getController();
+                doneController.getFilePath(pathURLData);
+                doneController.setPanes(mainView,generatorBorder);
                 mainView.setCenter(root);
                 sheduleInfoKill(root);
 
@@ -204,11 +201,7 @@ public void getDBName(){
     public void getPath() {
 
         FileChooser file = new FileChooser();
-        file.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Txt File","*txt"));
-        file.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Json File","*json"));
-        file.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Word File","*docx"));
-        file.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Old word File","*doc"));
-        file.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Pdf File","*pdf"));
+        file.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("File","*txt","*pdf","*docx","*doc","*json"));
 
         Stage openStage = new Stage();
         File openFile = file.showOpenDialog(openStage);

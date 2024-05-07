@@ -75,7 +75,7 @@
             <center>
                 <ImageView>
                     <image>
-                        <Image url="@assets/login/Logo.png" />
+                        <Image url="@assets/login/FinitaLogo.png" />
                     </image>
                 </ImageView>
             </center>

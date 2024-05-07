@@ -6,11 +6,50 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.examforge.DoneController" fx:id="doneBorderPane"
-stylesheets="@assets/styles/doneStyle.css">
-    <center>
-        <HBox alignment="CENTER">
-            <Label text="Generated Successful" fx:id="l1"/>
-        </HBox>
-    </center>
+            stylesheets="@assets/styles/doneStyle.css">
+    <left>
+        <BorderPane>
+            <center>
+<!--                <VBox spacing="20" alignment="CENTER">-->
+                    <StackPane alignment="CENTER" fx:id="ticketInfoPane">
+                        <Button fx:id="againButton" onAction="#again">
+                            <graphic>
+                                <ImageView>
+                                    <image>
+                                        <Image url="@assets/generator/againIco.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </StackPane>
+<!--                    <HBox alignment="CENTER" fx:id="buttonBox">-->
+<!--                        -->
+<!--                    </HBox>-->
+<!--                </VBox>-->
+            </center>
+            <padding>
+                <Insets  bottom="30"/>
+            </padding>
+            <bottom>
+                <HBox alignment="CENTER">
+                    <Label fx:id="infoLabel10" />
+                </HBox>
+            </bottom>
+        </BorderPane>
+    </left>
+    <right>
+        <BorderPane fx:id="ImagePaneLogo">
+            <center>
+                <ImageView>
+                    <image>
+                        <Image url="@assets/generator/Untitledfsfsfsfsaaaaa-1.png"/>
+                    </image>
+                </ImageView>
+            </center>
+        </BorderPane>
+    </right>
 </BorderPane>

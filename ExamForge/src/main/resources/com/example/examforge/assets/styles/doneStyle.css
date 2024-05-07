@@ -7,8 +7,25 @@
     -fx-pref-height: 600;
     -fx-max-height: 600;
 }
-#l1{
+#ImagePaneLogo{
+    -fx-background-color: #252121;
+    -fx-pref-width: 500;
+    -fx-max-width: 500;
+    -fx-background-radius: 0 12 12 0;
+}
+#ticketInfoPane{
+    -fx-pref-width: 300;
+    -fx-max-width: 300;
+}
+#infoLabel10{
+    -fx-text-fill: white;
     -fx-font-size: 15;
-    -fx-text-fill: White;
     -fx-font-weight: bold;
+}
+#againButton{
+    -fx-background-color: transparent;
+}
+#buttonBox{
+    -fx-pref-width: 300;
+    -fx-max-width: 300;
 }

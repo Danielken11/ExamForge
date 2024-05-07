@@ -28,7 +28,6 @@
 #mainBox{
     -fx-background-color: #252121;
     -fx-pref-height: 50;
-    -fx-background-radius: 12 0 0 12;
 }
 #showPassword .box{
     -fx-background-color: #706f6f;
