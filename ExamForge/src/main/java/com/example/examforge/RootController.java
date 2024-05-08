@@ -1,9 +1,5 @@
 package com.example.examforge;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -16,7 +12,6 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.effect.Effect;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -27,8 +22,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import java.io.IOException;
-import java.util.Timer;
-import javafx.scene.effect.DropShadow;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class RootController {
 
@@ -64,12 +58,14 @@ public class RootController {
         Label d1,d2,d3;
 
     private Stage stage;
-    private double xOffset;
-    private double yOffset;
+
+    private double xOffset;private double yOffset;
+
     private Parent root;
     Server server;
-    public Thread connectionThread;
-    public boolean connectionState;
+
+    Thread connectionThread;
+
     private User user;
 
     int currentPage = 1;
@@ -115,25 +111,102 @@ public class RootController {
             button.setOpacity(1.0);
         });
     }
-
     private void checkButtons(){
         dashButton.setStyle(currentPage == 1 ? "-fx-background-color:#494954" : "-fx-background-color:transparent;");
         dataButton.setStyle(currentPage == 2 ? "-fx-background-color:#494954" : "-fx-background-color:transparent;");
         generateButton.setStyle(currentPage == 3 ? "-fx-background-color:#494954" : "-fx-background-color:transparent;");
         settingsButton.setStyle(currentPage == 4 ? "-fx-background-color:#494954" : "-fx-background-color:transparent;");
-
     }
-//    private void setData(){
-//        Platform.runLater(()->{
-//            d1.setText(user.email);
-//            d2.setText(user.login);
-//            d3.setText(user.status);
-//        });
-//
-//    }
-    public void initialize() {
-//        setData();
 
+    private void setData(){
+        Platform.runLater(()->{
+            d1.setText(user.email);
+            d2.setText(user.login);
+            d3.setText(user.status);
+        });
+    }
+
+    public void serverStatus() throws IOException {
+
+        StringBuilder received = new StringBuilder();
+
+         connectionThread = new Thread(()->{
+            while(true){
+                try {
+                    Platform.runLater(()->{
+                        try {
+                            received.setLength(0);
+                            server.sendQuery("connectionStatus");
+                            received.append(server.in.readObject());
+
+                            if(!received.isEmpty()){
+                                statusLabel.setText("connected");
+                                statusLabel.setStyle("    -fx-font-size: 9;" +
+                                        "    -fx-text-fill: #15ec18;" +
+                                        "    -fx-font-weight: bold;" +
+                                        "    -fx-font-family: Arial;");
+
+                                System.out.println("connected");
+                            }
+                        } catch (IOException e) {
+                            statusLabel.setText("disconnected");
+                            statusLabel.setStyle("    -fx-font-size: 9;" +
+                                    "    -fx-text-fill: #ff3a3a;" +
+                                    "    -fx-font-weight: bold;" +
+                                    "    -fx-font-family: Arial;");
+                            System.out.println("disconnected");
+                            server.connect();
+                            throw new RuntimeException(e);
+                        } catch (ClassNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                    });
+                    Thread.sleep(5000);
+                }catch (Exception ex){
+                    Thread.currentThread().interrupt();
+                  ex.printStackTrace();
+                }
+            }
+        });
+
+        connectionThread.setDaemon(true);
+        connectionThread.start();
+
+//       Platform.runLater(()->{
+//           try {
+//               received.setLength(0);
+//               server.sendQuery("connectionStatus");
+//               received.append(server.in.readObject());
+//
+//               if(!received.isEmpty()){
+//                   statusLabel.setText("connected");
+//                   statusLabel.setStyle("    -fx-font-size: 9;" +
+//                           "    -fx-text-fill: #15ec18;" +
+//                           "    -fx-font-weight: bold;" +
+//                           "    -fx-font-family: Arial;");
+//
+//                   System.out.println("connected");
+//               }
+//           } catch (IOException e) {
+//               statusLabel.setText("disconnected");
+//                          statusLabel.setStyle("    -fx-font-size: 9;" +
+//                                  "    -fx-text-fill: #ff3a3a;" +
+//                                  "    -fx-font-weight: bold;" +
+//                                  "    -fx-font-family: Arial;");
+//                          System.out.println("disconnected");
+//                          server.connect();
+//               throw new RuntimeException(e);
+//           } catch (ClassNotFoundException e) {
+//               throw new RuntimeException(e);
+//           }
+//
+//       });
+    }
+    public void initialize() throws IOException {
+
+        setData();
+        serverStatus();
         checkButtons();
         buttonsOpacity(dashButton);buttonsOpacity(dataButton);
         buttonsOpacity(generateButton);buttonsOpacity(settingsButton);
@@ -163,8 +236,14 @@ public class RootController {
         });
 
         closeButton.setOnAction(event -> {
+
             stage.close();
+
         });
+
+//        stage.setOnCloseRequest(event->{
+//            shutdown();
+//        });
 
         prg1.setColor(Color.web("#8f3e8f"));
         prg2.setColor(Color.WHITE);
@@ -256,7 +335,7 @@ public class RootController {
 }
 
 @FXML
-    private void dashScene(){
+    private void dashScene() throws IOException {
     rootBorder.setCenter(mainView);
     currentPage = 1;
     checkButtons();
@@ -280,6 +359,7 @@ public class RootController {
         dataController.setServer(server);
         currentPage = 2;
         checkButtons();
+
 }
 @FXML
     private void generateScene() throws IOException {
@@ -291,6 +371,7 @@ public class RootController {
         generatorController.setPane(rootBorder);
         currentPage = 3;
         checkButtons();
+
 }
 @FXML
     private void settingsScene() throws IOException {
@@ -300,5 +381,6 @@ public class RootController {
         rootBorder.setCenter(root);
         currentPage = 4;
         checkButtons();
+
     }
 }
