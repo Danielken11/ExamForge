@@ -116,8 +116,6 @@ public void setDBTables(){
             questionColl.setPrefWidth(800);
 
             dataTable.getColumns().addAll(idColl,questionColl);
-//            dataTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
-
         });
     }
 }

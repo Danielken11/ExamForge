@@ -3,6 +3,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -32,6 +33,9 @@ public class App extends Application {
         scene.setOnMousePressed(this::onMousePressed);
         scene.setOnMouseDragged(this::onMouseDragged);
 
+        Image icon = new Image(getClass().getResource("/com/example/examforge/assets/root/ExamForge.png").toExternalForm());
+
+        stage.getIcons().add(icon);
         stage.setTitle("ExamForge");
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
@@ -39,31 +43,6 @@ public class App extends Application {
 
         LoadingController loadingController = loader.getController();
         loadingController.setStage(stage);
-
-
-//For the connection to the server after the start of the loading screen we need to create a thread with the progress indicator...
-//
-//        try(
-//                Socket socket = new Socket("192.168.100.237",19997);
-//                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-//                ObjectInputStream in = new ObjectInputStream(socket.getInputStream())
-//        ){
-//            System.out.println("Connected to the Server...");
-//            String query = "SELECT * FROM [Calculatoare].[dbo].[calculatoare.imprimante]";
-//            out.writeObject(query);
-//
-//            List<Object> list = new ArrayList<>();
-//
-//            list.add(in.readObject().toString());
-//
-//
-//            System.out.println(list);
-//
-//
-//        }catch (IOException | ClassNotFoundException e){
-//            System.out.println("Connection Interuptted!!!");
-//            e.printStackTrace();
-//        }
 
     }
 

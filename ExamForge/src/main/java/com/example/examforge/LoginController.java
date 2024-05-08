@@ -8,6 +8,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -164,6 +165,10 @@ public void initialize(){
 
         Scene scene = new Scene(root,1150,700);
         scene.setFill(Color.TRANSPARENT);
+
+        Image icon = new Image(getClass().getResource("/com/example/examforge/assets/root/ExamForge.png").toExternalForm());
+
+        rootStage.getIcons().add(icon);
         rootStage.setScene(scene);
         rootStage.initStyle(StageStyle.TRANSPARENT);
         rootStage.setOpacity(0.99);

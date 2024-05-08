@@ -176,9 +176,9 @@ private void signUP(ActionEvent event) throws IOException, ClassNotFoundExceptio
         StringBuilder data = new StringBuilder();
         data.append(server.in.readObject());
 
-        if(!data.isEmpty()){
+
          mainPane.setLeft(secondPane);
-        }
+
 
     }else{
         msgLabel.setText("Inccorect inserted data");

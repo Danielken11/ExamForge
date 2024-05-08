@@ -22,14 +22,6 @@
                 <Region fx:id="r1" />
                 <ComboBox fx:id="combo1" />
             </HBox>
-            <HBox fx:id="h2" GridPane.rowIndex="1" alignment="CENTER_LEFT">
-                <padding>
-                    <Insets left="20"/>
-                </padding>
-                <Label text="Color-Mode"/>
-                <Region fx:id="r2" />
-                <ComboBox fx:id="combo2" />
-            </HBox>
         </GridPane>
     </center>
     <bottom>

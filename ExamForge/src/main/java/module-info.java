@@ -6,6 +6,7 @@ module com.example.examforge {
     requires itextpdf;
     requires org.apache.poi.ooxml;
 
+
     opens com.example.examforge to javafx.fxml;
     exports com.example.examforge;
 }

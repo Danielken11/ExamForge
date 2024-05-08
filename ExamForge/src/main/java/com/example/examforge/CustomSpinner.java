@@ -34,8 +34,6 @@ public AtomicInteger var;
    public void initialize(){
        getChildren().addAll(spinner);
 
-//       this.textField.setText(String.valueOf(0));
-
        var = new AtomicInteger();
        this.incrementButton.setOnAction(event -> {
            var.getAndIncrement();

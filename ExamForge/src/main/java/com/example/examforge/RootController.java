@@ -162,7 +162,7 @@ public class RootController {
                         }
 
                     });
-                    Thread.sleep(5000);
+                    Thread.sleep(10000);
                 }catch (Exception ex){
                     Thread.currentThread().interrupt();
                   ex.printStackTrace();
@@ -173,45 +173,12 @@ public class RootController {
         connectionThread.setDaemon(true);
         connectionThread.start();
 
-//       Platform.runLater(()->{
-//           try {
-//               received.setLength(0);
-//               server.sendQuery("connectionStatus");
-//               received.append(server.in.readObject());
-//
-//               if(!received.isEmpty()){
-//                   statusLabel.setText("connected");
-//                   statusLabel.setStyle("    -fx-font-size: 9;" +
-//                           "    -fx-text-fill: #15ec18;" +
-//                           "    -fx-font-weight: bold;" +
-//                           "    -fx-font-family: Arial;");
-//
-//                   System.out.println("connected");
-//               }
-//           } catch (IOException e) {
-//               statusLabel.setText("disconnected");
-//                          statusLabel.setStyle("    -fx-font-size: 9;" +
-//                                  "    -fx-text-fill: #ff3a3a;" +
-//                                  "    -fx-font-weight: bold;" +
-//                                  "    -fx-font-family: Arial;");
-//                          System.out.println("disconnected");
-//                          server.connect();
-//               throw new RuntimeException(e);
-//           } catch (ClassNotFoundException e) {
-//               throw new RuntimeException(e);
-//           }
-//
-//       });
     }
     public void initialize() throws IOException {
 
-        setData();
-        serverStatus();
-        checkButtons();
+        setData();serverStatus();checkButtons();buttonInteraction(logOutButton);
         buttonsOpacity(dashButton);buttonsOpacity(dataButton);
         buttonsOpacity(generateButton);buttonsOpacity(settingsButton);
-
-        buttonInteraction(logOutButton);
 
         exitPaneBox.setVisible(false);
         changeStatsBox.setVisible(false);
@@ -241,10 +208,6 @@ public class RootController {
 
         });
 
-//        stage.setOnCloseRequest(event->{
-//            shutdown();
-//        });
-
         prg1.setColor(Color.web("#8f3e8f"));
         prg2.setColor(Color.WHITE);
         prg1.setProgress(0.7);
@@ -271,39 +234,7 @@ public class RootController {
         n2.setTickMarkVisible(false);
 
         dataBaseChart.getData().add(series);
-//
-//        Thread showStatus = new Thread(()->{
-//           while(true){
-//               try {
-//                   Platform.runLater(()->{
-//
-//                      if(server.connected){
-//                          statusLabel.setText("connected");
-//                          statusLabel.setStyle("    -fx-font-size: 9;" +
-//                                  "    -fx-text-fill: #15ec18;" +
-//                                  "    -fx-font-weight: bold;" +
-//                                  "    -fx-font-family: Arial;");
-//
-//                          System.out.println("connected");
-//                      }else if(!server.connected) {
-//                          statusLabel.setText("disconnected");
-//                          statusLabel.setStyle("    -fx-font-size: 9;" +
-//                                  "    -fx-text-fill: #ff3a3a;" +
-//                                  "    -fx-font-weight: bold;" +
-//                                  "    -fx-font-family: Arial;");
-//                          System.out.println("disconnected");
-//                      }
-//                   });
-//                   Thread.sleep(3000);
-//               }catch (Exception ex){
-//                   ex.printStackTrace();
-//               }
-//           }
-//        });
-//
-//        showStatus.start();
 }
-
 @FXML
     private void exitPane(){
     if(changeButton.isSelected()){
@@ -341,12 +272,10 @@ public class RootController {
     checkButtons();
 }
     private void slideTransition(Parent root) {
-
         javafx.animation.TranslateTransition transition = new javafx.animation.TranslateTransition(Duration.seconds(0.5), root);
         root.setTranslateY(mainView.getWidth());
 
         transition.setToY(0);
-
         transition.play();
     }
 
@@ -359,7 +288,6 @@ public class RootController {
         dataController.setServer(server);
         currentPage = 2;
         checkButtons();
-
 }
 @FXML
     private void generateScene() throws IOException {
@@ -371,7 +299,6 @@ public class RootController {
         generatorController.setPane(rootBorder);
         currentPage = 3;
         checkButtons();
-
 }
 @FXML
     private void settingsScene() throws IOException {
@@ -381,6 +308,5 @@ public class RootController {
         rootBorder.setCenter(root);
         currentPage = 4;
         checkButtons();
-
     }
 }

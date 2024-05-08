@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact type="jlink" name="ExamForge">
+    <output-path>$PROJECT_DIR$/out/artifacts/ExamForge</output-path>
+    <properties id="jlink-properties">
+      <options>
+        <option name="compressionLevel" value="2" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="ExamForge.jar">
+        <element id="module-output" name="ExamForge" />
+      </element>
+    </root>
+  </artifact>
+</component>

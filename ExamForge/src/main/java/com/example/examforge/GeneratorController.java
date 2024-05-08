@@ -263,7 +263,6 @@ public void getDBName(){
             }
         }
     }
-
     public void getPath() {
 
         FileChooser file = new FileChooser();

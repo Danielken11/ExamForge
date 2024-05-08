@@ -4,9 +4,7 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -122,7 +120,7 @@ public void checkData(){
     });
 }
 @FXML
-    public void again() throws IOException {
+    public void again(){
     mainView.setCenter(generatorPane);
 }
 

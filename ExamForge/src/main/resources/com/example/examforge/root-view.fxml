@@ -31,7 +31,7 @@
           <children>
             <ImageView>
               <image>
-<!--                <Image url="@assets/SilmCursorTopIco.png"/>-->
+                <Image url="@assets/root/ExamForgeTopIco.png"/>
               </image>
             </ImageView>
           </children>

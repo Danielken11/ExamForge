@@ -1,19 +1,19 @@
 package com.example.examforge;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 
 public class LoadingController {
+
     @FXML
     ProgressIndicator serverLoadIndicator;
     @FXML
@@ -54,6 +54,9 @@ public void runLoginView() throws IOException{
             scene.setOnMousePressed(this::onMousePressed);
             scene.setOnMouseDragged(this::onMouseDragged);
 
+            Image icon = new Image(getClass().getResource("/com/example/examforge/assets/root/ExamForge.png").toExternalForm());
+
+            loginStage.getIcons().add(icon);
             loginStage.setScene(scene);
             loginStage.initStyle(StageStyle.UNDECORATED);
             loginStage.setTitle("ExamForge");
@@ -71,122 +74,28 @@ public void runLoginView() throws IOException{
 
 public void initialize() throws IOException, InterruptedException {
 
-  Thread connectionThread = new Thread(() ->{
-      while (true){
-          try {
-              Thread.sleep(1000);
-          } catch (InterruptedException e) {
-              throw new RuntimeException(e);
-          }
-          server = new Server();
-          if(server.connected){
-              isRunning = true;
-              try {
-                  runLoginView();
-              } catch (IOException e) {
-                  throw new RuntimeException(e);
-              }
-              break;
-          }else{
-              System.out.println("Error");
-          }
-      }
-  });
+    Thread connectionThread = new Thread(() -> {
+        while (true) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            server = new Server();
+            if (server.connected) {
+                isRunning = true;
+                try {
+                    runLoginView();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            } else {
+                System.out.println("Error");
+            }
+        }
+    });
 
-  connectionThread.start();
-
-//  Thread checkConnection = new Thread(()->{
-//      while (true){
-//        try {
-//            Platform.runLater(()->{
-//                try {
-//                    server.sendQuery("GetStatus");
-//
-//                    String reception = (String) server.in.readObject();
-//                    System.out.println(reception);
-//                    isRunning = true;
-//
-//                    if(reception.isEmpty()){
-//                        isRunning = false;
-//                        while (true){
-//
-//                            server.connect();
-//
-//                            if(server.connected){
-//                                isRunning = true;
-//                                System.out.println("Connected");
-//                                break;
-//                            }
-//                        }
-//                    }
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                } catch (ClassNotFoundException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            });
-//        Thread.sleep(3000);
-//        }catch (Exception ex){
-//            ex.printStackTrace();
-//        }
-//      }
-//  });
-//
-//    checkConnection.start();
-
-}
-
-
-//    private void scheduleLabelDisappearance(Label label) {
-//        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> {
-//            label.setVisible(false);
-//            label.setManaged(false);
-//        }));
-//        timeline.play();
-//    }
-
-//    private void cursorInteraction(Button button){
-//        button.setOnMouseEntered(event -> {
-//            button.setCursor(Cursor.HAND);
-//        });
-//
-//        button.setOnMouseExited(event -> {
-//            button.setCursor(Cursor.DEFAULT);
-//        });
-//    }
-//    private void toggleCursorInteraction(ToggleButton button){
-//        button.setOnMouseEntered(event -> {
-//            button.setCursor(Cursor.HAND);
-//        });
-//
-//        button.setOnMouseExited(event -> {
-//            button.setCursor(Cursor.DEFAULT);
-//        });
-//    }
-//public void initialize(){
-//
-//    try(
-//            Socket socket = new Socket("192.168.100.237",19997);
-//            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-//            ObjectInputStream in = new ObjectInputStream(socket.getInputStream())
-//    ){
-//        System.out.println("Connected to the Server...");
-//        String query = "SELECT * FROM [Calculatoare].[dbo].[calculatoare.imprimante]";
-//        out.writeObject(query);
-//
-//        List<Object> list = new ArrayList<>();
-//
-//        list.add(in.readObject().toString());
-//
-//
-//        System.out.println(list);
-//
-//
-//    }catch (IOException | ClassNotFoundException e){
-//        System.out.println("Connection Interuptted!!!");
-//        e.printStackTrace();
-//    }
-
-
-//    }
+    connectionThread.start();
+ }
 }

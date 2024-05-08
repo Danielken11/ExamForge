@@ -20,7 +20,7 @@
 #versLabel{
     -fx-opacity: 0.50;
 }
-#h1,#h2{
+#h1{
     -fx-background-color: #494954;
     -fx-pref-width: 800;
     -fx-pref-height: 35;
@@ -30,7 +30,7 @@
 #versionBox{
     -fx-pref-width: 800;
 }
-#r1,#r2{
+#r1{
     -fx-pref-width: 600;
 }
 .combo-box{
