@@ -6,7 +6,11 @@
 ![image](https://github.com/Danielken11/ExamForge/assets/105623990/d061e51d-8c4e-40f3-a779-ed2b68ad3d8b)
 ![image](https://github.com/Danielken11/ExamForge/assets/105623990/4ecdbcf4-5005-4e12-b044-fb83174a849f)
 
-Result of ticket generation:
+All questions are random from own sql server
+Result of ticket generation txt:
 ![image](https://github.com/Danielken11/ExamForge/assets/105623990/311a69bf-cfae-4a29-b8ed-cafe2ab81c93)
+
+Result of ticket generation pdf:
+![image](https://github.com/Danielken11/ExamForge/assets/105623990/6c37671c-0ea8-439b-83e0-9f4b587ed2c6)
 
 Current State:Development
