@@ -43,9 +43,6 @@
     -fx-background-radius: 12;
     -fx-graphic-text-gap: 30;
 }
-#dashButton:hover,#dataButton:hover,#generateButton:hover,#settingsButton:hover{
-    -fx-background-color:#494954 ;
-}
 #connectionLabel{
     -fx-font-size: 9;
     -fx-text-fill: white;

@@ -44,6 +44,7 @@ BorderPane mainPane;
 BorderPane secondPane;
 TextField passwordShowLabel;
 Thread passwordFieldThread;
+
 private Timeline validationTimeline;
 private boolean passwdMatches = false;
 

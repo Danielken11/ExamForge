@@ -15,15 +15,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static java.lang.Math.random;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 public class GeneratorController {
 
@@ -48,6 +49,7 @@ private  ObservableList<String> questionList;
 private String pathURLData;
 private BorderPane mainView;
 Parent root;
+String fileExtension;
 
 private void buttonInteraction(Button button){
     button.setOnMouseEntered(event -> {
@@ -76,34 +78,95 @@ public void setPane(BorderPane borderPane){
 
 private void writeToFile(ArrayList<String> list, String fileUrl) throws IOException {
 
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileUrl, false))) {
+   if(fileExtension.matches("docx")) {
 
-        int quantity = quantitySpinner.getValue();
-        int numbers = numberSpinner.getValue();
+       XWPFDocument document = new XWPFDocument();
+       try (FileOutputStream out = new FileOutputStream(fileUrl)) {
+           int quantity = quantitySpinner.getValue();
+           int numbers = numberSpinner.getValue();
 
-        for(int i = 0; i<quantity;i++){
+           for (int i = 0; i < quantity; i++) {
+               Collections.shuffle(list);
+               List<String> ticketQuestions = list.subList(0, numbers);
 
-            Collections.shuffle(list);
+               for (String question : ticketQuestions) {
+                   XWPFParagraph paragraph = document.createParagraph();
+                   XWPFRun run = paragraph.createRun();
+                   run.setText(question);
+               }
+               if (checkLine.isSelected()) {
+                   XWPFParagraph separator = document.createParagraph();
+                   XWPFRun sepRun = separator.createRun();
+                   sepRun.setText("---------------------------------------------------------------------------------------------------------------------");
+               }
+               document.createParagraph().createRun().addBreak();
+           }
+           document.write(out);
+           System.out.println("DOCX file created successfully!");
+       } catch (Exception ex) {
+           throw new IOException("Error creating DOCX file: " + ex.getMessage());
+       }
+   }else if (fileExtension.matches("pdf")){
 
-            List<String> ticketQuestions = list.subList(0, numbers);
+       Document document = new Document();
+       try {
+           PdfWriter.getInstance(document, new FileOutputStream(fileUrl));
+           document.open();
 
-            for (String question : ticketQuestions) {
-                writer.write(question);
-                writer.newLine();
-            }
-            if (checkLine.isSelected()) {
-                writer.newLine();
-                writer.write("---------------------------------------------------------------------------------------------------------------------\n");
-                writer.newLine();
-            }else{
-                writer.newLine();
-                writer.write("");
-                writer.newLine();
-            }
-        }
-    } catch (IOException ex) {
-        throw new IOException("Error writing to file: " + ex.getMessage());
-    }
+           int quantity = quantitySpinner.getValue();
+           int numbers = numberSpinner.getValue();
+
+           for (int i = 0; i < quantity; i++) {
+               Collections.shuffle(list);
+               List<String> ticketQuestions = list.subList(0, numbers);
+
+               for (String question : ticketQuestions) {
+                   document.add(new Paragraph(question));
+               }
+               if (checkLine.isSelected()) {
+                   document.add(new Paragraph("---------------------------------------------------------------------------------------------------------------------"));
+               }
+               document.add(new Paragraph("\n"));
+           }
+           System.out.println("PDF file created successfully!");
+       } catch (Exception ex) {
+           throw new IOException("Error creating PDF file: " + ex.getMessage());
+       } finally {
+           document.close();
+       }
+
+   }else if(fileExtension.matches("txt") || fileExtension.matches("json") || fileExtension.matches("doc")){
+       try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileUrl, false))) {
+
+           int quantity = quantitySpinner.getValue();
+           int numbers = numberSpinner.getValue();
+
+           for(int i = 0; i<quantity;i++){
+
+               Collections.shuffle(list);
+
+               List<String> ticketQuestions = list.subList(0, numbers);
+
+               for (String question : ticketQuestions) {
+                   writer.write(question);
+                   writer.newLine();
+               }
+               if (checkLine.isSelected()) {
+                   writer.newLine();
+                   writer.write("---------------------------------------------------------------------------------------------------------------------\n");
+                   writer.newLine();
+               }else{
+                   writer.newLine();
+                   writer.write("");
+                   writer.newLine();
+               }
+           }
+       } catch (IOException ex) {
+           throw new IOException("Error writing to file: " + ex.getMessage());
+       }
+   }else{
+       System.out.println("Unknown file extension");
+   }
 }
 
 public void setServer(Server server) {
@@ -191,7 +254,6 @@ public void getDBName(){
                 ArrayList<String> arrayList = new ArrayList<>(questionList);
                 Collections.shuffle(arrayList);
                 writeToFile(arrayList,pathURLData);
-                System.out.println("done");
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("done-view.fxml"));
                 root = loader.load();
@@ -217,6 +279,11 @@ public void getDBName(){
 
         if(openFile == null) {
             pathUrl.setText("");
+        }else{
+            String fileName = openFile.getName();
+
+            fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1, openFile.getName().length());
+            System.out.println(fileExtension);
         }
 
     }

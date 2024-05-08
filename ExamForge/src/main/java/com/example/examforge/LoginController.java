@@ -139,18 +139,18 @@ public void initialize(){
 @FXML
     private void login() throws IOException, ClassNotFoundException {
 
-    String query = "SELECT * FROM [Calculatoare].[dbo].[Users] WHERE Login = '" +  login.getText() + "' AND Password = '" + password.getText() + "'";
-
-    server.sendQuery(query);
-    String receivedData = (String) server.in.readObject();
-
-    System.out.println(receivedData);
-
-    if(receivedData.isEmpty()){
-        System.out.println("Empty data");
-        msgLabel.setText("Invalid login credentials. Please check your username and password.");
-        scheduleLabelDisappearance(msgLabel);
-    }else{
+//    String query = "SELECT * FROM [Calculatoare].[dbo].[Users] WHERE Login = '" +  login.getText() + "' AND Password = '" + password.getText() + "'";
+//
+//    server.sendQuery(query);
+//    String receivedData = (String) server.in.readObject();
+//
+//    System.out.println(receivedData);
+//
+//    if(receivedData.isEmpty()){
+//        System.out.println("Empty data");
+//        msgLabel.setText("Invalid login credentials. Please check your username and password.");
+//        scheduleLabelDisappearance(msgLabel);
+//    }else{
         Stage rootStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("root-view.fxml"));
         root = loader.load();
@@ -173,15 +173,15 @@ public void initialize(){
         stage.close();
 
         RootController rootController = loader.getController();
-
-        String[] arrayString = receivedData.split(",");
-
-        User currentUser = new User(arrayString[0],arrayString[1],arrayString[2],"Student");
-
-        rootController.setUserData(currentUser);
+//
+//        String[] arrayString = receivedData.split(",");
+//
+//        User currentUser = new User(arrayString[0],arrayString[1],arrayString[2],"Student");
+//
+//        rootController.setUserData(currentUser);
         rootController.setStage(rootStage);
         rootController.setServer(server);
-    }
+//    }
 }
 
 @FXML

@@ -16,6 +16,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.effect.Effect;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -27,6 +28,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import java.io.IOException;
 import java.util.Timer;
+import javafx.scene.effect.DropShadow;
 
 public class RootController {
 
@@ -35,13 +37,11 @@ public class RootController {
     @FXML
     HBox topBar;
     @FXML
-    Button dashButton;
+    Button dashButton,dataButton,generateButton,settingsButton;
     @FXML
     BorderPane rootBorder;
     @FXML
     BorderPane mainView;
-    @FXML
-    Button settingsButton;
     @FXML
     GridPane statsGrid;
     @FXML
@@ -71,6 +71,8 @@ public class RootController {
     public Thread connectionThread;
     public boolean connectionState;
     private User user;
+
+    int currentPage = 1;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -102,18 +104,42 @@ public class RootController {
     public void setUserData(User user){
         this.user = user;
     }
-    private void setData(){
-        Platform.runLater(()->{
-            d1.setText(user.email);
-            d2.setText(user.login);
-            d3.setText(user.status);
+
+    private void buttonsOpacity(Button button){
+
+        button.setOnMouseEntered(event -> {
+            button.setOpacity(0.4);
         });
 
+        button.setOnMouseExited(event -> {
+            button.setOpacity(1.0);
+        });
     }
+
+    private void checkButtons(){
+        dashButton.setStyle(currentPage == 1 ? "-fx-background-color:#494954" : "-fx-background-color:transparent;");
+        dataButton.setStyle(currentPage == 2 ? "-fx-background-color:#494954" : "-fx-background-color:transparent;");
+        generateButton.setStyle(currentPage == 3 ? "-fx-background-color:#494954" : "-fx-background-color:transparent;");
+        settingsButton.setStyle(currentPage == 4 ? "-fx-background-color:#494954" : "-fx-background-color:transparent;");
+
+    }
+//    private void setData(){
+//        Platform.runLater(()->{
+//            d1.setText(user.email);
+//            d2.setText(user.login);
+//            d3.setText(user.status);
+//        });
+//
+//    }
     public void initialize() {
-        setData();
-        
+//        setData();
+
+        checkButtons();
+        buttonsOpacity(dashButton);buttonsOpacity(dataButton);
+        buttonsOpacity(generateButton);buttonsOpacity(settingsButton);
+
         buttonInteraction(logOutButton);
+
         exitPaneBox.setVisible(false);
         changeStatsBox.setVisible(false);
 
@@ -232,13 +258,12 @@ public class RootController {
 @FXML
     private void dashScene(){
     rootBorder.setCenter(mainView);
-
-
+    currentPage = 1;
+    checkButtons();
 }
     private void slideTransition(Parent root) {
 
         javafx.animation.TranslateTransition transition = new javafx.animation.TranslateTransition(Duration.seconds(0.5), root);
-
         root.setTranslateY(mainView.getWidth());
 
         transition.setToY(0);
@@ -253,6 +278,8 @@ public class RootController {
         rootBorder.setCenter(root);
         DataController dataController = loader.getController();
         dataController.setServer(server);
+        currentPage = 2;
+        checkButtons();
 }
 @FXML
     private void generateScene() throws IOException {
@@ -262,6 +289,8 @@ public class RootController {
         GeneratorController generatorController  = loader.getController();
         generatorController.setServer(server);
         generatorController.setPane(rootBorder);
+        currentPage = 3;
+        checkButtons();
 }
 @FXML
     private void settingsScene() throws IOException {
@@ -269,7 +298,7 @@ public class RootController {
         root = loader.load();
         slideTransition(root);
         rootBorder.setCenter(root);
-
-
+        currentPage = 4;
+        checkButtons();
     }
 }
