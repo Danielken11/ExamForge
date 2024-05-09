@@ -3,6 +3,7 @@ import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -45,8 +46,11 @@ private StringBuilder tableData;
 private  ObservableList<String> questionList;
 private String pathURLData;
 private BorderPane mainView;
+private int numbersQuestionSize;
+
 Parent root;
 String fileExtension;
+
 
 private void buttonInteraction(Button button){
     button.setOnMouseEntered(event -> {
@@ -171,6 +175,9 @@ public void setServer(Server server) {
 }
 
 public void initialize(){
+
+    numberSpinner.setDisable(true);
+    quantitySpinner.setDisable(true);
     getDBName();setDBTables();
 
     buttonInteraction(pathButton);
@@ -250,6 +257,7 @@ public void getDBName(){
             if (!questionList.isEmpty()) {
                 ArrayList<String> arrayList = new ArrayList<>(questionList);
                 Collections.shuffle(arrayList);
+
                 writeToFile(arrayList,pathURLData);
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("done-view.fxml"));
@@ -280,6 +288,37 @@ public void getDBName(){
 
             fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1, openFile.getName().length());
             System.out.println(fileExtension);
+        }
+    }
+
+//A few problems with custom spinner values...
+@FXML
+    public void getTableInfo() {
+
+        String selectedTableName = comboTable.getSelectionModel().getSelectedItem();
+        String query = "SELECT * FROM " + selectedTableName;
+
+        try {
+            server.sendQuery(query);
+
+            StringBuilder sizeData = new StringBuilder();
+            sizeData.append(server.in.readObject());
+            ObservableList<String> firstList = FXCollections.observableArrayList();
+
+            String fullString = sizeData.toString();
+            String[] stringArray = fullString.split(",");
+            firstList.addAll(stringArray);
+
+            numbersQuestionSize = firstList.size();
+
+            numberSpinner.setDisable(false);
+            quantitySpinner.setDisable(false);
+
+            numberSpinner.setMax(numbersQuestionSize);
+            quantitySpinner.setMax(100);
+
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException();
         }
 
     }

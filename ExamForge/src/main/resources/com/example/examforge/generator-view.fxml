@@ -50,7 +50,7 @@
                                       </VBox>
                                       <Region fx:id="r1"/>
                                       <Pane fx:id="pane1">
-                                          <ComboBox promptText="Select table" fx:id="comboTable"/>
+                                          <ComboBox promptText="Select table" fx:id="comboTable" onAction="#getTableInfo"/>
                                       </Pane>
                                   </HBox>
                                   <HBox fx:id="h2" alignment="CENTER_LEFT">

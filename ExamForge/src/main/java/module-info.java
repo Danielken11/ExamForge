@@ -5,6 +5,8 @@ module com.example.examforge {
     requires org.kordamp.bootstrapfx.core;
     requires itextpdf;
     requires org.apache.poi.ooxml;
+    requires com.fasterxml.jackson.core;
+    requires com.fasterxml.jackson.databind;
 
 
     opens com.example.examforge to javafx.fxml;

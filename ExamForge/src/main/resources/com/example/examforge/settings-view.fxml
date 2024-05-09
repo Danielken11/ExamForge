@@ -18,9 +18,9 @@
                 <padding>
                     <Insets left="20"/>
                 </padding>
-                <Label text="Language"/>
+                <Label fx:id="labelSettings"/>
                 <Region fx:id="r1" />
-                <ComboBox fx:id="combo1" />
+                <ComboBox fx:id="combo1" onAction="#changeSettings"/>
             </HBox>
         </GridPane>
     </center>

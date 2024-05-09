@@ -15,6 +15,7 @@ private Button incrementButton,decrementButton;
 public Label textField;
 private HBox spinner;
 public AtomicInteger var;
+public int maxQuestion;
 
     private void buttonInteraction(Button button){
         button.setOnMouseEntered(event -> {
@@ -24,6 +25,9 @@ public AtomicInteger var;
         button.setOnMouseExited(event -> {
             button.setCursor(Cursor.DEFAULT);
         });
+    }
+    public void setMax(int maxQuestion){
+        this.maxQuestion = maxQuestion;
     }
 
    public CustomSpinner(){
@@ -36,8 +40,11 @@ public AtomicInteger var;
 
        var = new AtomicInteger();
        this.incrementButton.setOnAction(event -> {
-           var.getAndIncrement();
-           this.textField.setText(String.valueOf(var));
+           int value = var.get();
+           if(value < maxQuestion){
+               var.getAndIncrement();
+               this.textField.setText(String.valueOf(var));
+           }
        });
 
        this.decrementButton.setOnAction(event -> {

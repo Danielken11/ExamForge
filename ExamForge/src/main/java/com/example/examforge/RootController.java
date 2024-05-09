@@ -1,4 +1,5 @@
 package com.example.examforge;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,8 @@ import javafx.scene.shape.Ellipse;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -63,6 +66,8 @@ public class RootController {
 
     private Parent root;
     Server server;
+    Settings settings;
+    ObjectMapper objectMapper;
 
     Thread connectionThread;
 
@@ -111,6 +116,24 @@ public class RootController {
             button.setOpacity(1.0);
         });
     }
+
+    private void applySettings(){
+        Platform.runLater(()->{
+            try {
+                File file = new File("appSettings.json");
+                if (file.exists()) {
+                    settings = new Settings();
+                    objectMapper = new ObjectMapper();
+                    settings = objectMapper.readValue(file, Settings.class);
+                    System.out.println(settings.getLanguage());
+                } else {
+                    System.out.println("Error while reading settings");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
     private void checkButtons(){
         dashButton.setStyle(currentPage == 1 ? "-fx-background-color:#494954" : "-fx-background-color:transparent;");
         dataButton.setStyle(currentPage == 2 ? "-fx-background-color:#494954" : "-fx-background-color:transparent;");
@@ -118,13 +141,13 @@ public class RootController {
         settingsButton.setStyle(currentPage == 4 ? "-fx-background-color:#494954" : "-fx-background-color:transparent;");
     }
 
-    private void setData(){
-        Platform.runLater(()->{
-            d1.setText(user.email);
-            d2.setText(user.login);
-            d3.setText(user.status);
-        });
-    }
+//    private void setData(){
+//        Platform.runLater(()->{
+//            d1.setText(user.email);
+//            d2.setText(user.login);
+//            d3.setText(user.status);
+//        });
+//    }
 
     public void serverStatus() throws IOException {
 
@@ -162,7 +185,7 @@ public class RootController {
                         }
 
                     });
-                    Thread.sleep(10000);
+                    Thread.sleep(5000);
                 }catch (Exception ex){
                     Thread.currentThread().interrupt();
                   ex.printStackTrace();
@@ -176,9 +199,11 @@ public class RootController {
     }
     public void initialize() throws IOException {
 
-        setData();serverStatus();checkButtons();buttonInteraction(logOutButton);
+//        setData();
+        serverStatus();checkButtons();buttonInteraction(logOutButton);
         buttonsOpacity(dashButton);buttonsOpacity(dataButton);
         buttonsOpacity(generateButton);buttonsOpacity(settingsButton);
+        applySettings();
 
         exitPaneBox.setVisible(false);
         changeStatsBox.setVisible(false);
